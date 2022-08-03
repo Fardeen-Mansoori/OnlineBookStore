@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.Payment;
+import com.onlinebookstore.dto.UserBilling;
 import com.onlinebookstore.exception.PaymentException;
 import com.onlinebookstore.service.PaymentService;
 
@@ -17,7 +19,10 @@ PaymentService paymentServiice;
 
 @Test
 public void createPaymentTest() throws PaymentException{
-	Payment payment = new Payment();
+	//String type, String cardName, String cardNumber, int expiryMonth, int expiryYear,
+	//int cvc, String holderName, Order order, UserBilling userBilling
+	
+	Payment payment = new Payment("","","",0,0,0,"",null,null);
 	assertNotNull(paymentServiice.createPayment(payment));
 }
 	
