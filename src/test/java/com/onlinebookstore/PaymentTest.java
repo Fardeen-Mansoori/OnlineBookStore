@@ -23,8 +23,6 @@ public class PaymentTest {
 		// String type, String cardName, String cardNumber, int expiryMonth, int
 		// expiryYear,
 		// int cvc, String holderName, Order order, UserBilling userBilling
-
-		// Payment payment = new Payment("","","",0,0,0,"",null,null);
 		assertNotNull(paymentService.createPayment(payment));
 		assertThrows(PaymentException.class, () -> paymentService.getPaymentById(payment.getPaymentId() + 1));
 	}
