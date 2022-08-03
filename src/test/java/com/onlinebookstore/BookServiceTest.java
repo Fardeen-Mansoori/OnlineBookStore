@@ -30,6 +30,7 @@ public class BookServiceTest {
 	public void addBookTest() throws BookException{
 		
 		assertNotNull(this.bookService.addBook(book));
+		assertThrows(BookException.class,()->this.bookService.addBook(null));
 	}
 	
 	
