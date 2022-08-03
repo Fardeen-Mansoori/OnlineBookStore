@@ -45,7 +45,7 @@ public class OrderController {
 	}
 
 	@GetMapping("allorders")
-	public List<Order> getAllOrders() throws BookException {
+	public List<Order> getAllOrders() throws OrderException {
 		return this.orderService.getAllOrders();
 	}
 
