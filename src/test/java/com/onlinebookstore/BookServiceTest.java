@@ -3,6 +3,8 @@ package com.onlinebookstore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.Test;
+
+import com.onlinebookstore.dao.BookRepository;
 import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.dto.Category;
 import com.onlinebookstore.exception.BookException;
@@ -20,7 +22,10 @@ import org.junit.jupiter.api.AfterEach;
 public class BookServiceTest {
 	
 	@Autowired
-	private BookService  bookService;// = new BookServiceImpl();
+	private BookService  bookService;
+	
+	@Autowired
+	BookRepository bookRepository;
 	
 	//Book book = new Book(55,"abc","abcd","fardeen",100.0, new Category(100,"abcd","abc"));
 	
@@ -33,15 +38,47 @@ public class BookServiceTest {
 		assertThrows(BookException.class,()->this.bookService.addBook(null));
 	}
 	
+	@Test
+	public void getBookByIdTest() throws BookException{
+		
+		assertNotNull(this.bookService.addBook(book));
+		assertNotNull(this.bookService.getBookById(book.getBookId()));
+		assertThrows(BookException.class,()->this.bookService.getBookById(0));
+		
+	}
+	
+	@Test
+	public void updateBookTest() throws BookException{
+		
+		assertNotNull(this.bookService.addBook(book));
+		book.setBookName("New Book");
+		assertEquals("New Book",book.getBookName());
+		assertThrows(BookException.class,()->this.bookService.updateBook(null));
+		
+	}
+	
 	
 	@Test
 	public void deleteBookByIdTest() throws BookException{
 		
+		assertNotNull(this.bookService.addBook(book));
+		
 		assertEquals("Successful", this.bookService.deleteBookById(book.getBookId()));
 		
-		assertThrows(BookException.class,()-> this.bookService.deleteBookById(501));
+		assertThrows(BookException.class,()-> this.bookService.deleteBookById(0));
 		
 		
 	}
+	
+	@Test
+	public void getAllBooksTest() throws BookException{
+		
+		assertNotNull(this.bookService.addBook(book));
+		assertNotNull(this.bookService.getAllBooks());
+		this.bookRepository.deleteAll();
+		assertThrows(BookException.class,()->this.bookService.getAllBooks());
+	}
+	
+	
 
 }

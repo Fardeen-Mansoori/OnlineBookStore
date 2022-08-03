@@ -46,6 +46,9 @@ public class BookServiceImpl implements BookService {
 	@Override
 	@Transactional
 	public Book updateBook(Book book) throws BookException {
+		if(book==null) {
+			throw new BookException("Book cannot be null");
+		}
 		Optional<Book> foundBook = this.bookRepository.findById(book.getBookId());
 
 		if (foundBook.isEmpty()) {
@@ -72,7 +75,10 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Book> getAllBooks() throws BookException {
-
-		return this.bookRepository.findAll();
+        List<Book> bookList = this.bookRepository.findAll();
+        if(bookList.isEmpty()) {
+        	throw new BookException("No books found");
+        }
+		return bookList;
 	}
 }
