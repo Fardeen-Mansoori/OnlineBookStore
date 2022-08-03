@@ -66,6 +66,8 @@ public class Wishlist {
 		this.dateOfCreation = dateOfCreation;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Wishlist [wishlistId=" + wishlistId + ", user=" + user + ", book=" + book + ", dateOfCreation="
