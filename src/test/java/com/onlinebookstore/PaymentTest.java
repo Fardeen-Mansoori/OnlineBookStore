@@ -31,6 +31,7 @@ public class PaymentTest {
 	public void getPaymentByIdTest() throws PaymentException {
 		assertNotNull(paymentService.createPayment(payment));
 		assertNotNull(paymentService.getPaymentById(payment.getPaymentId()));
+		assertThrows(PaymentException.class,()-> paymentService.getPaymentById(200));
 	}
 
 }
