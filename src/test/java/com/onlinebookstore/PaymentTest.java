@@ -1,6 +1,6 @@
 package com.onlinebookstore;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +15,18 @@ import com.onlinebookstore.service.PaymentService;
 @SpringBootTest
 public class PaymentTest {
 @Autowired
-PaymentService paymentServiice;
+PaymentService paymentService;
+
+Payment payment = new Payment("","","",0,0,0,"",null,null);
 
 @Test
 public void createPaymentTest() throws PaymentException{
 	//String type, String cardName, String cardNumber, int expiryMonth, int expiryYear,
 	//int cvc, String holderName, Order order, UserBilling userBilling
 	
-	Payment payment = new Payment("","","",0,0,0,"",null,null);
-	assertNotNull(paymentServiice.createPayment(payment));
+	//Payment payment = new Payment("","","",0,0,0,"",null,null);
+	assertNotNull(paymentService.createPayment(payment));
+	assertThrows(PaymentException.class,()->paymentService.getPaymentById(payment.getPaymentId()+1));
 }
 	
 	
