@@ -4,7 +4,6 @@ import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.exception.BookException;
 import java.util.List;
 
-
 public interface BookService {
 
 	Book addBook(Book book) throws BookException;

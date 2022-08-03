@@ -29,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public String deleteAdmin(Integer adminId, String adminPassword) throws AdminException {
-		String isDeleted = "Unsuccessful";
+		String isDeleted ;
 		List<Admin> admin = this.adminRepository.findAll();
 		if (admin.isEmpty()) {
 			throw new AdminException("Admin does not exist for id " + adminId);

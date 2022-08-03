@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String deleteUserById(Integer userId) throws UserException {
 
-		String isDeleted = "Unsuccessful";
+		String isDeleted ;
 		Optional<User> foundUser = userRepository.findById(userId);
 		if (foundUser.isEmpty()) {
 			throw new UserException("User does not exist for id " + userId);

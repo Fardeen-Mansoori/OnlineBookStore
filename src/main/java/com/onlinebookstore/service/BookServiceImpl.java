@@ -40,7 +40,6 @@ public class BookServiceImpl implements BookService {
 		if (optBook.isEmpty()) {
 			throw new BookException("Book doesn't exist for bookid " + bookId);
 		}
-		// System.out.println("Customer details:"+book);
 		return optBook.get();
 	}
 
@@ -58,8 +57,8 @@ public class BookServiceImpl implements BookService {
 	@Override
 	@Transactional
 	public String deleteBookById(Integer bookId) throws BookException {
-		// TODO Auto-generated method stub
-		String isDeleted = "Unsuccessful";
+
+		String isDeleted;
 		Optional<Book> foundBook = bookRepository.findById(bookId);
 		if (foundBook.isEmpty()) {
 			throw new BookException("Book does not exist for id " + bookId);
