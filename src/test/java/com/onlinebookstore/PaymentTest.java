@@ -6,29 +6,33 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.Payment;
-import com.onlinebookstore.dto.UserBilling;
+
 import com.onlinebookstore.exception.PaymentException;
 import com.onlinebookstore.service.PaymentService;
 
 @SpringBootTest
 public class PaymentTest {
-@Autowired
-PaymentService paymentService;
+	@Autowired
+	PaymentService paymentService;
 
-Payment payment = new Payment("","","",0,0,0,"",null,null);
+	Payment payment = new Payment("", "", "", 0, 0, 0, "", null, null);
 
-@Test
-public void createPaymentTest() throws PaymentException{
-	//String type, String cardName, String cardNumber, int expiryMonth, int expiryYear,
-	//int cvc, String holderName, Order order, UserBilling userBilling
-	
-	//Payment payment = new Payment("","","",0,0,0,"",null,null);
-	assertNotNull(paymentService.createPayment(payment));
-	assertThrows(PaymentException.class,()->paymentService.getPaymentById(payment.getPaymentId()+1));
-}
-	
-	
+	@Test
+	public void createPaymentTest() throws PaymentException {
+		// String type, String cardName, String cardNumber, int expiryMonth, int
+		// expiryYear,
+		// int cvc, String holderName, Order order, UserBilling userBilling
+
+		// Payment payment = new Payment("","","",0,0,0,"",null,null);
+		assertNotNull(paymentService.createPayment(payment));
+		assertThrows(PaymentException.class, () -> paymentService.getPaymentById(payment.getPaymentId() + 1));
+	}
+
+	@Test
+	public void getPaymentByIdTest() throws PaymentException {
+		assertNotNull(paymentService.createPayment(payment));
+		assertNotNull(paymentService.getPaymentById(payment.getPaymentId()));
+	}
 
 }
