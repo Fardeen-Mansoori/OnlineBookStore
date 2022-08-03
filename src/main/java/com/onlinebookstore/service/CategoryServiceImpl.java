@@ -32,11 +32,12 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category getCategoryByCategoryId(Integer categoryId) throws CategoryException {
 		// TODO Auto-generated method stub
+		if(categoryId==null) {
+			throw new CategoryException("Enter valid Category Id!");
+		}
 		Optional<Category> foundCategory = this.categoryRepository.findById(categoryId);
 		if (foundCategory.isEmpty()) {
 			throw new CategoryException("Category doesn't exists for categoryid " + categoryId);
-		}else if(categoryId==null) {
-			throw new CategoryException("Enter valid Category Id!");
 		}
 		return foundCategory.get();
 	}
@@ -58,12 +59,13 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public String deleteCategoryById(Integer categoryId) throws CategoryException {
 		// TODO Auto-generated method stub
+		if(categoryId == null) {
+			throw new CategoryException("Enter valid Category Id!");
+		}
 		String isDeleted;
 		Optional<Category> foundCategory = categoryRepository.findById(categoryId);
 		if (foundCategory.isEmpty()) {
 			throw new CategoryException("Category does not exist for id " + categoryId);
-		}else if(categoryId == null) {
-			throw new CategoryException("Enter valid Category Id!");
 		}else {
 			categoryRepository.delete(foundCategory.get());
 			isDeleted = "Successful";

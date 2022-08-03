@@ -26,20 +26,20 @@ public class CategoryServiceTest {
 	Category category = new Category(101, "Science-Fiction", "Science");
 	
 	@Test
-	public void createCategory() throws CategoryException{
+	public void createCategoryTest() throws CategoryException{
 		assertNotNull(this.categoryService.createCategory(category));
 		assertThrows(CategoryException.class,()->this.categoryService.createCategory(null));
 		
 	}
 	@Test
-	public void getCategoryByCategoryId() throws CategoryException{
+	public void getCategoryByCategoryIdTest() throws CategoryException{
 		assertNotNull(this.categoryService.createCategory(category));
 		assertNotNull(this.categoryService.getCategoryByCategoryId(category.getCategoryId()));
 		assertThrows(CategoryException.class,()->this.categoryService.getCategoryByCategoryId(0));
-		//assertThrows(CategoryException.class,()->this.categoryService.getCategoryByCategoryId(null));
+		assertThrows(CategoryException.class,()->this.categoryService.getCategoryByCategoryId(null));
 	}
 	@Test
-	public void updateCategory() throws CategoryException{
+	public void updateCategoryTest() throws CategoryException{
 		assertNotNull(this.categoryService.createCategory(category));
 		category.setCategoryName("Novels");
 		assertNotNull(this.categoryService.updateCategory(category));
@@ -48,15 +48,15 @@ public class CategoryServiceTest {
 		
 	}
 	@Test
-	public void deleteCategoryById() throws CategoryException{
+	public void deleteCategoryByIdTest() throws CategoryException{
 		assertNotNull(this.categoryService.createCategory(category));
 		assertEquals("Successful",this.categoryService.deleteCategoryById(category.getCategoryId()));
 		assertThrows(CategoryException.class,()->this.categoryService.deleteCategoryById(0));
-		//assertThrows(CategoryException.class,()->this.categoryService.deleteCategoryById(null));
+		assertThrows(CategoryException.class,()->this.categoryService.deleteCategoryById(null));
 		
 	}
 	@Test
-	public void getAllCategory() throws CategoryException {
+	public void getAllCategoryTest() throws CategoryException {
 		assertNotNull(this.categoryService.createCategory(category));
 		assertNotNull(this.categoryService.getAllCategory());
 		this.categoryRepository.deleteAll();
