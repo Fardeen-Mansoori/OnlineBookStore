@@ -17,7 +17,10 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category createCategory(Category category) throws CategoryException {
-		Category categoryAdded = null;
+		if(category == null) {
+			throw new CategoryException("Category cannot be Null!");
+		}
+		Category categoryAdded;
 		try {
 			categoryAdded = this.categoryRepository.save(category);
 		} catch (Exception e) {
@@ -32,6 +35,8 @@ public class CategoryServiceImpl implements CategoryService {
 		Optional<Category> foundCategory = this.categoryRepository.findById(categoryId);
 		if (foundCategory.isEmpty()) {
 			throw new CategoryException("Category doesn't exists for categoryid " + categoryId);
+		}else if(categoryId==null) {
+			throw new CategoryException("Enter valid Category Id!");
 		}
 		return foundCategory.get();
 	}
@@ -39,6 +44,9 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category updateCategory(Category category) throws CategoryException {
 		// TODO Auto-generated method stub
+		if(category == null) {
+			throw new CategoryException("Category cannot be Null!");
+		}
 		Optional<Category> foundCategory = this.categoryRepository.findById(category.getCategoryId());
 
 		if (foundCategory.isEmpty()) {
@@ -53,8 +61,10 @@ public class CategoryServiceImpl implements CategoryService {
 		String isDeleted;
 		Optional<Category> foundCategory = categoryRepository.findById(categoryId);
 		if (foundCategory.isEmpty()) {
-			throw new CategoryException("Book does not exist for id " + categoryId);
-		} else {
+			throw new CategoryException("Category does not exist for id " + categoryId);
+		}else if(categoryId == null) {
+			throw new CategoryException("Enter valid Category Id!");
+		}else {
 			categoryRepository.delete(foundCategory.get());
 			isDeleted = "Successful";
 		}
@@ -65,6 +75,10 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Category> getAllCategory() throws CategoryException {
 		// TODO Auto-generated method stub
+		List<Category> categoryList = this.categoryRepository.findAll();
+		if(categoryList.isEmpty()) {
+			throw new CategoryException("No Category Found");
+		}
 		return this.categoryRepository.findAll();
 	}
 }
