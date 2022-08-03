@@ -22,13 +22,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User registerUser(User user) throws UserException {
 		// TODO Auto-generated method stub
+		if(user == null) {
+			throw new UserException("User cannot be Null!");
+		}
 		Optional<User> foundUser = this.userRepository.findById(user.getUserId());
-		if (!foundUser.isEmpty()) {
+		if (!(foundUser.isEmpty())) {
 			throw new UserException("User already exists!");
 		}
 		this.cartRepository.save(new Cart(user.getUserId()));
 
-		return userRepository.save(user);
+		return this.userRepository.save(user);
 	}
 
 	@Override
@@ -44,6 +47,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateUser(User user) throws UserException {
 		// TODO Auto-generated method stub
+		if(user == null) {
+			throw new UserException("User cannot be Null!");
+		}
 		Optional<User> foundUser = this.userRepository.findById(user.getUserId());
 
 		if (foundUser.isEmpty()) {
@@ -71,6 +77,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUser() throws UserException {
 		// TODO Auto-generated method stub
-		return this.userRepository.findAll();
+		List<User> userList = this.userRepository.findAll();
+		if(userList.isEmpty()) {
+			throw new UserException("No Users Found!");
+		}
+		return userList;
 	}
 }
