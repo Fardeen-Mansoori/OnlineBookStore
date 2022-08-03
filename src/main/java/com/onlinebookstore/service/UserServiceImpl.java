@@ -13,65 +13,64 @@ import com.onlinebookstore.dto.User;
 import com.onlinebookstore.exception.UserException;
 
 @Service
-public class UserServiceImpl implements UserService{
-@Autowired
-UserRepository userRepository;
-@Autowired
-CartRepository cartRepository;
+public class UserServiceImpl implements UserService {
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	CartRepository cartRepository;
 
-@Override
-public User registerUser(User user) throws UserException {
-	// TODO Auto-generated method stub
-	Optional<User> foundUser = this.userRepository.findById(user.getUserId());
-	if(!foundUser.isEmpty()) {
-		throw new UserException("User already exists!");
+	@Override
+	public User registerUser(User user) throws UserException {
+		// TODO Auto-generated method stub
+		Optional<User> foundUser = this.userRepository.findById(user.getUserId());
+		if (!foundUser.isEmpty()) {
+			throw new UserException("User already exists!");
+		}
+		this.cartRepository.save(new Cart(user.getUserId()));
+
+		return userRepository.save(user);
 	}
-	this.cartRepository.save(new Cart(user.getUserId()));
-	
-	return userRepository.save(user);
-}
 
-@Override
-public User getUserById(Integer userId) throws UserException {
-	// TODO Auto-generated method stub
-	Optional<User> foundUser = this.userRepository.findById(userId);
-	if(foundUser.isEmpty()) {
-		throw new UserException("User doesnot exists for id "+userId);
+	@Override
+	public User getUserById(Integer userId) throws UserException {
+		// TODO Auto-generated method stub
+		Optional<User> foundUser = this.userRepository.findById(userId);
+		if (foundUser.isEmpty()) {
+			throw new UserException("User doesnot exists for id " + userId);
+		}
+		return foundUser.get();
 	}
-	return foundUser.get();
-}
 
-@Override
-public User updateUser(User user) throws UserException {
-	// TODO Auto-generated method stub
-	Optional<User> foundUser = this.userRepository.findById(user.getUserId());
-	if(user.equals(null)) {
-		throw new UserException("Enter valid User Details!");
-	}else if(foundUser.isEmpty()) {
-		throw new UserException("User doesnot exists for id "+user.getUserId());
+	@Override
+	public User updateUser(User user) throws UserException {
+		// TODO Auto-generated method stub
+		Optional<User> foundUser = this.userRepository.findById(user.getUserId());
+
+		if (foundUser.isEmpty()) {
+			throw new UserException("User doesnot exists for id " + user.getUserId());
+		}
+		return this.userRepository.save(user);
+
 	}
-	return this.userRepository.save(user);
-	
-}
 
-@Override
-public String deleteUserById(Integer userId) throws UserException {
-	
-	String isDeleted = "Unsuccessful";
-	Optional<User> foundUser = userRepository.findById(userId);
-	if(foundUser.isEmpty()) {
-		throw new UserException("User does not exist for id "+userId);
-	}else {
-		userRepository.delete(foundUser.get());
-		this.cartRepository.delete(new Cart(foundUser.get().getUserId()));
-		isDeleted = "Successful";
+	@Override
+	public String deleteUserById(Integer userId) throws UserException {
+
+		String isDeleted = "Unsuccessful";
+		Optional<User> foundUser = userRepository.findById(userId);
+		if (foundUser.isEmpty()) {
+			throw new UserException("User does not exist for id " + userId);
+		} else {
+			userRepository.delete(foundUser.get());
+			this.cartRepository.delete(new Cart(foundUser.get().getUserId()));
+			isDeleted = "Successful";
+		}
+		return isDeleted;
 	}
-	return isDeleted;
-}
 
-@Override
-public List<User> getAllUser() throws UserException {
-	// TODO Auto-generated method stub
-	return this.userRepository.findAll();
-}
+	@Override
+	public List<User> getAllUser() throws UserException {
+		// TODO Auto-generated method stub
+		return this.userRepository.findAll();
+	}
 }

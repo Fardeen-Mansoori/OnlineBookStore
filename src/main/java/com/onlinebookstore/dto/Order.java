@@ -1,9 +1,6 @@
 package com.onlinebookstore.dto;
 
 import java.util.Calendar;
-import java.time.Instant;
-import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 import java.util.List;
 
@@ -31,22 +28,20 @@ public class Order {
 
 	public Order() {
 		super();
-		
+
 	}
 
-	public Order( String shippingAddress,Calendar orderDate,Calendar deliveryDate, List<Book> book,
-			User user) {
+	public Order(String shippingAddress, List<Book> book, User user) {
 		super();
 		this.orderDate = Calendar.getInstance();
-		//Calendar calender= Calendar.getInstance();
-		//calender.add(calender.DAY_OF_MONTH, 7);
+		// Calendar calender= Calendar.getInstance();
+		// calender.add(calender.DAY_OF_MONTH, 7);
 		this.deliveryDate = Calendar.getInstance();
 		this.shippingAddress = shippingAddress;
 		this.book = book;
 		this.user = user;
-		
-	}
 
+	}
 
 	public Integer getOrderId() {
 		return orderId;
@@ -55,8 +50,6 @@ public class Order {
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
-
-
 
 	public Calendar getOrderDate() {
 		return orderDate;

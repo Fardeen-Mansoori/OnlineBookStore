@@ -37,18 +37,13 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Override
 	public Payment getPaymentById(Integer paymentId) throws PaymentException {
-		Optional<Payment> foundPayment = null;
-		try {
-			foundPayment = paymentRepository.findById(paymentId);
-			if (foundPayment.isEmpty()) {
-				throw new PaymentException("Payment doesn't exists for Id :" + paymentId);
+		Optional<Payment> foundPayment = paymentRepository.findById(paymentId);
 
-			}
-
-		} catch (Exception e) {
-			throw new PaymentException(e.getMessage());
+		if (foundPayment.isEmpty()) {
+			throw new PaymentException("Payment doesn't exists for Id :" + paymentId);
 
 		}
+
 		return foundPayment.get();
 	}
 }

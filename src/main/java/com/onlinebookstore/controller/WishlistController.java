@@ -53,7 +53,7 @@ public class WishlistController {
 	
 
 @GetMapping("allwishlists")
-public List<Wishlist> getAllWishlists() throws WishlistException{
+public List<Wishlist> getAllWishlists(){
 	return this.wishlistService.getAllWishlist();
 }
 	

@@ -11,7 +11,7 @@ import com.onlinebookstore.dto.Category;
 import com.onlinebookstore.exception.CategoryException;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	CategoryRepository categoryRepository;
 
@@ -20,7 +20,7 @@ public class CategoryServiceImpl implements CategoryService{
 		Category categoryAdded = null;
 		try {
 			categoryAdded = this.categoryRepository.save(category);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw new CategoryException("Category could not be Added!");
 		}
 		return categoryAdded;
@@ -30,8 +30,8 @@ public class CategoryServiceImpl implements CategoryService{
 	public Category getCategoryByCategoryId(Integer categoryId) throws CategoryException {
 		// TODO Auto-generated method stub
 		Optional<Category> foundCategory = this.categoryRepository.findById(categoryId);
-		if(foundCategory.isEmpty()) {
-			throw new CategoryException("Category doesn't exists for categoryid "+categoryId);
+		if (foundCategory.isEmpty()) {
+			throw new CategoryException("Category doesn't exists for categoryid " + categoryId);
 		}
 		return foundCategory.get();
 	}
@@ -40,10 +40,9 @@ public class CategoryServiceImpl implements CategoryService{
 	public Category updateCategory(Category category) throws CategoryException {
 		// TODO Auto-generated method stub
 		Optional<Category> foundCategory = this.categoryRepository.findById(category.getCategoryId());
-		if(category.equals(null)) {
-			throw new CategoryException("Enter valid Category!");
-		}else if(foundCategory.isEmpty()) {
-			throw new CategoryException("Category doesnot exists for id "+category.getCategoryId());
+
+		if (foundCategory.isEmpty()) {
+			throw new CategoryException("Category doesnot exists for id " + category.getCategoryId());
 		}
 		return this.categoryRepository.save(category);
 	}
@@ -53,14 +52,14 @@ public class CategoryServiceImpl implements CategoryService{
 		// TODO Auto-generated method stub
 		String isDeleted = "Unsuccessful";
 		Optional<Category> foundCategory = categoryRepository.findById(categoryId);
-		if(foundCategory.isEmpty()) {
-			throw new CategoryException("Book does not exist for id "+categoryId);
-		}else {
-			categoryRepository.delete(foundCategory.get());;
+		if (foundCategory.isEmpty()) {
+			throw new CategoryException("Book does not exist for id " + categoryId);
+		} else {
+			categoryRepository.delete(foundCategory.get());
 			isDeleted = "Successful";
 		}
 		return isDeleted;
-		
+
 	}
 
 	@Override

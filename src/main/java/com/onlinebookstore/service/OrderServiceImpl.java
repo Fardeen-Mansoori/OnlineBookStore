@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinebookstore.dao.OrderRepository;
-import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.exception.BookException;
 import com.onlinebookstore.exception.OrderException;
@@ -41,7 +40,7 @@ public String cancelOrderById(Integer orderId) throws OrderException {
 	if(foundOrder.isEmpty()) {
 		throw new OrderException("Order does not exist for id "+orderId);
 	}else {
-		orderRepository.delete(foundOrder.get());;
+		orderRepository.delete(foundOrder.get());
 		isDeleted = "Successful";
 	}
 	return isDeleted;
@@ -57,9 +56,7 @@ public List<Order> getAllOrders() throws BookException {
 @Override
 public Order updateOrder(Order order) throws OrderException {
 	Optional<Order> foundOrder = this.orderRepository.findById(order.getOrderId());
-	if(order.equals(null)) {
-		throw new OrderException("Enter valid Order!");
-	}else if(foundOrder.isEmpty()) {
+	if(foundOrder.isEmpty()) {
 		throw new OrderException("Order doesnot exists for id "+order.getOrderId());
 	}
 	return this.orderRepository.save(order);
