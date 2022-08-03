@@ -50,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public String deleteCategoryById(Integer categoryId) throws CategoryException {
 		// TODO Auto-generated method stub
-		String isDeleted = "Unsuccessful";
+		String isDeleted;
 		Optional<Category> foundCategory = categoryRepository.findById(categoryId);
 		if (foundCategory.isEmpty()) {
 			throw new CategoryException("Book does not exist for id " + categoryId);

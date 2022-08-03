@@ -61,7 +61,7 @@ public Wishlist updateWishlist(Wishlist wishlist) throws WishlistException {
 
 @Override
 public String removeWishlistById(Integer wishlistId) throws WishlistException {
-	String isDeleted="Unsuccessfull";
+	String isDeleted;
   Optional<Wishlist> foundWishlist=this.wishlistRepository.findById(wishlistId);
   if(!foundWishlist.isEmpty())
   {

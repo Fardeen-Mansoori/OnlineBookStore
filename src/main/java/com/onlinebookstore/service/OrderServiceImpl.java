@@ -35,7 +35,7 @@ public Order getOrderById(Integer orderId) throws OrderException {
 
 @Override
 public String cancelOrderById(Integer orderId) throws OrderException {
-	String isDeleted = "Unsuccessful";
+	String isDeleted ;
 	Optional<Order> foundOrder = orderRepository.findById(orderId);
 	if(foundOrder.isEmpty()) {
 		throw new OrderException("Order does not exist for id "+orderId);
