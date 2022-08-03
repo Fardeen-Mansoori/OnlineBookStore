@@ -10,16 +10,17 @@ import com.onlinebookstore.exception.OrderException;
 import com.onlinebookstore.service.BookService;
 import com.onlinebookstore.service.BookServiceImpl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 import org.junit.jupiter.api.AfterEach;
 
 @SpringBootTest
 public class BookServiceTest {
 	
-	//Autowired
-	BookService  bookService = new BookServiceImpl();
+	@Autowired
+	private BookService  bookService;// = new BookServiceImpl();
 	
 	//Book book = new Book(55,"abc","abcd","fardeen",100.0, new Category(100,"abcd","abc"));
 	
@@ -31,12 +32,14 @@ public class BookServiceTest {
 		assertNotNull(this.bookService.addBook(book));
 	}
 	
-	@AfterEach
+	
+	@Test
 	public void deleteBookByIdTest() throws BookException{
 		
 		assertEquals("Successful", this.bookService.deleteBookById(book.getBookId()));
 		
-		assertEquals("Unsuccessful", this.bookService.deleteBookById(501));
+		assertThrows(BookException.class,()-> this.bookService.deleteBookById(501));
+		
 		
 	}
 
