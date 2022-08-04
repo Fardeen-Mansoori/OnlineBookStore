@@ -21,7 +21,7 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 
-	@PostMapping("order")
+	@PostMapping("order/place")
 	public Order placeOrder(@RequestBody Order order) {
 		Order foundorder = null;
 		try {
@@ -78,6 +78,7 @@ public class OrderController {
 
 	}
 	
+
 	@PostMapping("order/orderFromCart/{userId}")
 	public Order OrderFromcart(@PathVariable Integer userId) throws OrderException {
 		Order foundorder = null;
