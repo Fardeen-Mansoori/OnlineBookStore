@@ -17,4 +17,5 @@ public interface OrderService {
 	List<Order> getAllOrders() throws OrderException;
 	String deleteAllOrders() throws OrderException;
 	Order OrderFromcart(Integer userId) throws OrderException;
+	
 }
