@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -11,6 +13,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Wishlist {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer wishlistId;
 
 	@OneToOne
@@ -24,6 +27,14 @@ public class Wishlist {
 	public Wishlist() {
 		super();
 
+	}
+	
+	public Wishlist( User user, List<Book> book, Date dateOfCreation) {
+		super();
+		
+		this.user = user;
+		this.book = book;
+		this.dateOfCreation = dateOfCreation;
 	}
 
 	public Integer getWishlistId() {
@@ -58,13 +69,7 @@ public class Wishlist {
 		this.dateOfCreation = dateOfCreation;
 	}
 
-	public Wishlist(Integer wishlistId, User user, List<Book> book, Date dateOfCreation) {
-		super();
-		this.wishlistId = wishlistId;
-		this.user = user;
-		this.book = book;
-		this.dateOfCreation = dateOfCreation;
-	}
+	
 
 	
 

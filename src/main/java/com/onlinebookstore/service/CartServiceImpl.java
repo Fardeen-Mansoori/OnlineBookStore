@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.onlinebookstore.dao.CartRepository;
 import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.dto.Cart;
+import com.onlinebookstore.exception.BookException;
 import com.onlinebookstore.exception.CartException;
 
 @Service
@@ -22,20 +23,17 @@ public class CartServiceImpl implements CartService {
 	BookService bookService;
 
 	@Override
-	public Cart addToCartByBookId(Integer cartId, Integer bookId, Integer qty) throws CartException {
-		Double subTotal = 0.0;
+	public Cart addToCartByBookId(Integer cartId, Integer bookId, Integer qty) throws CartException, BookException {
+		Double subTotal;
 		Optional<Cart> foundCart = this.cartRepository.findById(cartId);
+		if (!foundCart.isPresent()) {
+			throw new CartException("Cart not found!");
+		}
 		List<Book> newBookIdList = foundCart.get().getBook();
-		Book foundBook = null;
-		try {
-			foundBook = bookService.getBookById(bookId);
-		} catch (Exception e) {
-			e.getStackTrace();
-		}
 
-		if (foundCart.isEmpty()) {
-			throw new CartException("Cart doesnot exists for id " + cartId);
-		}
+		Book foundBook = bookService.getBookById(bookId);
+		
+
 		for (Integer i = 0; i < qty; i++) {
 			newBookIdList.add(foundBook);
 		}
@@ -51,7 +49,7 @@ public class CartServiceImpl implements CartService {
 
 		return foundCart.get();
 	}
-
+	
 	@Override
 	public Cart getCartById(Integer cartId) throws CartException {
 

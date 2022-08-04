@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.onlinebookstore.dto.Cart;
+import com.onlinebookstore.exception.BookException;
 import com.onlinebookstore.exception.CartException;
 import com.onlinebookstore.service.CartService;
 @RestController
@@ -19,7 +20,7 @@ public class CartController {
 	CartService cartService;
 	
 	@PostMapping("addBook/{cartId}/{bookId}/{qty}")
-	public Cart addToCartByBookId(@PathVariable Integer cartId, @PathVariable Integer bookId, @PathVariable Integer qty) throws CartException {
+	public Cart addToCartByBookId(@PathVariable Integer cartId, @PathVariable Integer bookId, @PathVariable Integer qty) throws CartException, BookException {
 		return this.cartService.addToCartByBookId(cartId, bookId, qty);
 	}
 	

@@ -10,44 +10,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.exception.BookException;
 import com.onlinebookstore.exception.OrderException;
 import com.onlinebookstore.service.OrderService;
+
 @RestController
 public class OrderController {
-@Autowired
-OrderService orderService;
+	@Autowired
+	OrderService orderService;
+
 	@PostMapping("order")
 	public Order placeOrder(@RequestBody Order order) {
-		Order foundorder=null;
+		Order foundorder = null;
 		try {
-			foundorder=this.orderService.placeOrder(order);
+			foundorder = this.orderService.placeOrder(order);
 		} catch (OrderException e) {
 			System.out.println(e.getMessage());
 		}
 		return foundorder;
-		
+
 	}
-	
+
 	@GetMapping("order/{orderId}")
 	public Order getOrderById(@PathVariable Integer orderId) throws OrderException {
 		return this.orderService.getOrderById(orderId);
 
 	}
-	
+
 	@DeleteMapping("order/{orderId}")
 	public String cancelOrderById(@PathVariable Integer orderId) throws OrderException {
 		return this.orderService.cancelOrderById(orderId);
-		
+
 	}
-	
-	
+
 	@GetMapping("allorders")
-	public List<Order> getAllOrders() throws BookException{
+	public List<Order> getAllOrders() throws OrderException {
 		return this.orderService.getAllOrders();
 	}
-	
-	
+
 }

@@ -14,6 +14,6 @@ public interface OrderService {
 	Order getOrderById(Integer orderId) throws OrderException;
 	String cancelOrderById(Integer orderId) throws OrderException;
 	Order updateOrder(Order order) throws OrderException;
-	List<Order> getAllOrders() throws BookException;
+	List<Order> getAllOrders() throws OrderException;
 	
 }
