@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class User {
@@ -14,6 +16,7 @@ public class User {
 	private String userEmail;
 	private String userAddress;
 	private Integer userContact;
+	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
 
 	public User() {
