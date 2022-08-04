@@ -37,8 +37,8 @@ public class Order {
 	}
 	public Order(String shippingAddress, List<Book> book, User user) {
 		super();
-		//this.orderDate=orderDate;
-		//LocalDate tempDate=LocalDate.parse("2022-08-04").plusDays(7);
+		this.orderDate=LocalDate.now();;
+		this.deliveryDate=LocalDate.parse("2022-08-04").plusDays(7);
 		//this.deliveryDate = deliveryDate.plusDays(7);
 		this.shippingAddress = shippingAddress;
 		this.book = book;

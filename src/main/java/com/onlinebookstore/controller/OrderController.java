@@ -55,4 +55,9 @@ public class OrderController {
 		return this.orderService.deleteAllOrders();
 
 	}
+	
+	@PostMapping("order/{userId}")
+	public Order OrderFromcart(@PathVariable Integer userId) throws OrderException {
+		return this.orderService.OrderFromcart(userId);
+	}
 }
