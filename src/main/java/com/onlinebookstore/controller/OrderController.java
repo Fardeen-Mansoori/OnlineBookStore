@@ -50,7 +50,7 @@ public class OrderController {
 	}
 
 	
-	@DeleteMapping("order/delete")
+	@DeleteMapping("order/delete/orders")
 	public String deleteAllOrders() throws OrderException {
 		return this.orderService.deleteAllOrders();
 
