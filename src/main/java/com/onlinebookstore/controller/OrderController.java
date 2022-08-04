@@ -20,7 +20,7 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 
-	@PostMapping("order")
+	@PostMapping("order/place")
 	public Order placeOrder(@RequestBody Order order) {
 		Order foundorder = null;
 		try {
@@ -32,31 +32,31 @@ public class OrderController {
 
 	}
 
-	@GetMapping("order/{orderId}")
+	@GetMapping("order/get/{orderId}")
 	public Order getOrderById(@PathVariable Integer orderId) throws OrderException {
 		return this.orderService.getOrderById(orderId);
 
 	}
 
-	@DeleteMapping("order/{orderId}")
+	@DeleteMapping("order/cancel/{orderId}")
 	public String cancelOrderById(@PathVariable Integer orderId) throws OrderException {
 		return this.orderService.cancelOrderById(orderId);
 
 	}
 
-	@GetMapping("allorders")
+	@GetMapping("order/orders")
 	public List<Order> getAllOrders() throws OrderException {
 		return this.orderService.getAllOrders();
 	}
 
 	
-	@DeleteMapping("order")
+	@DeleteMapping("order/delete")
 	public String deleteAllOrders() throws OrderException {
 		return this.orderService.deleteAllOrders();
 
 	}
 	
-	@PostMapping("order/{userId}")
+	@PostMapping("order/placeThroughCart/{userId}")
 	public Order OrderFromcart(@PathVariable Integer userId) throws OrderException {
 		return this.orderService.OrderFromcart(userId);
 	}

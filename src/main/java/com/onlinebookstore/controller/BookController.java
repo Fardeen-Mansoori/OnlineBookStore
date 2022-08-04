@@ -52,7 +52,7 @@ public String deleteBookById(@PathVariable Integer bookId) throws BookException 
 	
 }
 
-@GetMapping("book/allBooks")
+@GetMapping("book/books")
 public List<Book> getAllBooks() throws BookException{
 	return this.bookService.getAllBooks();
 }

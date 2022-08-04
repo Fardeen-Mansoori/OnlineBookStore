@@ -22,26 +22,26 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 
-	@PostMapping("admin")
+	@PostMapping("admin/add")
 	public Admin registerUser(@RequestBody Admin admin) throws AdminException {
 
 		return this.adminService.registerAdmin(admin);
 
 	}
 
-	@GetMapping("admin")
+	@GetMapping("admin/get")
 	public List<Admin> getAdmin() throws AdminException {
 		return this.adminService.getAdmin();
 
 	}
 
-	@PutMapping("admin")
+	@PutMapping("admin/update")
 	public Admin updateAdmin(@RequestBody Admin admin) throws AdminException {
 		return this.adminService.updateAdmin(admin);
 
 	}
 
-	@DeleteMapping("admin/{adminId}/{adminPassword}")
+	@DeleteMapping("admin/delete/{adminId}/{adminPassword}")
 	public String deleteAdmin(@PathVariable Integer adminId, @PathVariable String adminPassword) throws AdminException {
 		return this.adminService.deleteAdmin(adminId, adminPassword);
 

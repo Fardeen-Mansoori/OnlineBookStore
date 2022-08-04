@@ -21,7 +21,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@PostMapping("user")
+	@PostMapping("user/register")
 	public User registerUser(@RequestBody User user) throws UserException {
 		
 			return this.userService.registerUser(user);
@@ -29,25 +29,25 @@ public class UserController {
 		
 	}
 
-	@GetMapping("user/{userId}")
+	@GetMapping("user/get/{userId}")
 	public User getUser(@PathVariable Integer userId) throws UserException {
 		return this.userService.getUserById(userId);
 
 	}
 
-	@PutMapping("user")
+	@PutMapping("user/update")
 	public User updateUser(@RequestBody User user) throws UserException {
 		return this.userService.updateUser(user);
 		
 	}
 
-	@DeleteMapping("user/{userId}")
+	@DeleteMapping("user/delete/{userId}")
 	public String deleteUserById(@PathVariable Integer userId) throws UserException {
 		return this.userService.deleteUserById(userId);
 		
 	}
 
-	@GetMapping("allUsers")
+	@GetMapping("user/users")
 	public List<User> getAllUsers() throws UserException{
 		return this.userService.getAllUser();
 	}
