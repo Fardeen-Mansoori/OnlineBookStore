@@ -1,6 +1,8 @@
 package com.onlinebookstore.dto;
 
-import java.util.Calendar;
+import java.text.ParseException;
+
+import java.time.LocalDate;
 
 import java.util.List;
 
@@ -12,14 +14,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "Orders")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer orderId;
-	private Calendar orderDate;
-	private Calendar deliveryDate;
+
+	
+	private LocalDate orderDate= LocalDate.now();
+	private LocalDate deliveryDate=LocalDate.now().plusDays(7);
 	private String shippingAddress;
 	@OneToMany
 	private List<Book> book;
@@ -30,13 +35,11 @@ public class Order {
 		super();
 
 	}
-
 	public Order(String shippingAddress, List<Book> book, User user) {
 		super();
-		this.orderDate = Calendar.getInstance();
-		// Calendar calender= Calendar.getInstance();
-		// calender.add(calender.DAY_OF_MONTH, 7);
-		this.deliveryDate = Calendar.getInstance();
+		//this.orderDate=orderDate;
+		//LocalDate tempDate=LocalDate.parse("2022-08-04").plusDays(7);
+		//this.deliveryDate = deliveryDate.plusDays(7);
 		this.shippingAddress = shippingAddress;
 		this.book = book;
 		this.user = user;
@@ -51,21 +54,16 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public Calendar getOrderDate() {
+	public LocalDate getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Calendar orderDate) {
-		this.orderDate = orderDate;
-	}
 
-	public Calendar getDeliveryDate() {
+	public LocalDate getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(Calendar deliveryDate) {
-		this.deliveryDate = deliveryDate;
-	}
+
 
 	public String getShippingAddress() {
 		return shippingAddress;
@@ -93,8 +91,9 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "OrderDetails [orderId=" + orderId + ", orderDate=" + orderDate + ", deliveryDate=" + deliveryDate
-				+ ", shippingAddress=" + shippingAddress + ", book=" + book + ", user=" + user + "]";
+		return "OrderDetails [orderId=" + orderId + ", orderDate=" + orderDate + 
+				", shippingAddress=" + shippingAddress + ", book=" + book + ", user=" + user + "]";
 	}
 
+	
 }

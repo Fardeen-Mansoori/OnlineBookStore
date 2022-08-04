@@ -49,4 +49,10 @@ public class OrderController {
 		return this.orderService.getAllOrders();
 	}
 
+	
+	@DeleteMapping("order")
+	public String deleteAllOrders() throws OrderException {
+		return this.orderService.deleteAllOrders();
+
+	}
 }

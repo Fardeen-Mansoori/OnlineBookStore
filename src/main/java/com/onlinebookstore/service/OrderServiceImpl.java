@@ -72,6 +72,12 @@ public Order updateOrder(Order order) throws OrderException {
 	}
 	return this.orderRepository.save(order);
 }
+
+@Override
+public String deleteAllOrders() throws OrderException {
+	this.orderRepository.deleteAll();
+	return "deleted successfully"; 
+}
  
  
 
