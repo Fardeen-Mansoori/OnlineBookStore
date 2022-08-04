@@ -12,6 +12,8 @@ import com.onlinebookstore.service.BookService;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.AfterEach;
+
 @SpringBootTest
 public class BookServiceTest {
 	
@@ -23,7 +25,7 @@ public class BookServiceTest {
 	
 	//Book book = new Book(55,"abc","abcd","fardeen",100.0, new Category(100,"abcd","abc"));
 	
-      Book book = new Book(51,null,null,null,null,new Category(100,"abcd","abc"));
+      Book book = new Book(55,null,null,null,null, null);
 	
 	@Test
 	public void addBookTest() throws BookException{
