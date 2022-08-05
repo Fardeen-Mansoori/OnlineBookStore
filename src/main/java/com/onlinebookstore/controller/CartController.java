@@ -19,12 +19,12 @@ public class CartController {
 	@Autowired
 	CartService cartService;
 	
-	@PostMapping("cart/addBook/{cartId}/{bookId}/{qty}")
+	@PostMapping("cart/{cartId}/{bookId}/{qty}")
 	public Cart addToCartByBookId(@PathVariable Integer cartId, @PathVariable Integer bookId, @PathVariable Integer qty) throws CartException, BookException {
 		return this.cartService.addToCartByBookId(cartId, bookId, qty);
 	}
 	
-	@GetMapping("cart/get/{cartId}")
+	@GetMapping("cart/{cartId}")
 	public Cart getCartById(@PathVariable Integer cartId) throws CartException {
 		return this.cartService.getCartById(cartId);
 
