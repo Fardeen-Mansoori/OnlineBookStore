@@ -20,29 +20,29 @@ public class WishlistController {
 	@Autowired
 	WishlistService wishlistService;
 
-	@GetMapping("wishlist/get/{wishlistId}")
+	@GetMapping("wishlist/{wishlistId}")
 	public Wishlist getWishlistById(@PathVariable Integer wishlistId) throws WishlistException {
 		return this.wishlistService.getWishlistById(wishlistId);
 	}
 
-	@PostMapping("wishlist/create")
+	@PostMapping("wishlist")
 	public Wishlist createWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
-		Wishlist foundWishlist = null;
+		Wishlist creationOfWishlist = null;
 		try {
-			foundWishlist = this.wishlistService.createWishlist(foundWishlist);
+			creationOfWishlist = this.wishlistService.createWishlist(wishlist);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return foundWishlist;
+		return creationOfWishlist;
 
 	}
 
-	@PutMapping("wishlist/update")
+	@PutMapping("wishlist")
 	public Wishlist updateWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
 		return this.wishlistService.updateWishlist(wishlist);
 	}
 
-	@DeleteMapping("wishlist/delete/{wishlistId}")
+	@DeleteMapping("wishlist/{wishlistId}")
 	public String deleteWishlist(@PathVariable Integer wishlistId) throws WishlistException {
 		return this.wishlistService.removeWishlistById(wishlistId);
 	}
