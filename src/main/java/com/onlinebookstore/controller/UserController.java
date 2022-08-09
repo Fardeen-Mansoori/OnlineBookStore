@@ -2,7 +2,10 @@ package com.onlinebookstore.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +25,7 @@ public class UserController {
 	UserService userService;
 	
 	@PostMapping("user/register")
-	public User registerUser(@RequestBody User user) throws UserException {
+	public User registerUser(@Valid @RequestBody User user)throws MethodArgumentNotValidException, UserException {
 		
 			return this.userService.registerUser(user);
 		
@@ -36,7 +39,7 @@ public class UserController {
 	}
 
 	@PutMapping("user/update")
-	public User updateUser(@RequestBody User user) throws UserException {
+	public User updateUser(@Valid @RequestBody User user) throws UserException,MethodArgumentNotValidException {
 		return this.userService.updateUser(user);
 		
 	}

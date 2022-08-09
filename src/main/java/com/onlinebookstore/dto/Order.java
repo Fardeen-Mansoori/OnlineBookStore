@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -24,7 +27,12 @@ public class Order {
 
 	
 	private LocalDate orderDate= LocalDate.now();
+	
 	private LocalDate deliveryDate=LocalDate.now().plusDays(7);
+	
+	@NotNull(message = "Shipping Address can not be null")
+	@NotBlank(message="Shipping Address can not be blank")
+	@Size(min=10,max = 50,message = "Shipping Address must be of minimum 10 characters and maximum of 50 characters")
 	private String shippingAddress;
 	@OneToMany
 	private List<Book> book;
