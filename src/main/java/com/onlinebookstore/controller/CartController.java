@@ -24,7 +24,7 @@ public class CartController {
 		return this.cartService.addToCartByBookId(cartId, bookId, qty);
 	}
 	
-	@GetMapping("cart/get/{cartId}")
+	@GetMapping("cart/{cartId}")
 	public Cart getCartById(@PathVariable Integer cartId) throws CartException {
 		return this.cartService.getCartById(cartId);
 

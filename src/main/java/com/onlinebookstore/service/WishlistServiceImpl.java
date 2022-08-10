@@ -19,21 +19,21 @@ public class WishlistServiceImpl implements WishlistService {
 	@Autowired
 	BookRepository bookRepository;
 
-	@Override
-	public Wishlist createWishlist(Wishlist wishlist) throws WishlistException {
-		if (wishlist == null) {
-			throw new WishlistException("Wishlist cannot be null!");
-		}
-		Wishlist wishlistAdded;
-
-		try {
-
-			wishlistAdded = this.wishlistRepository.save(wishlist);
-		} catch (Exception e) {
-			throw new WishlistException("Wishlist could not be created");
-		}
-		return wishlistAdded;
-	}
+//	@Override
+//	public Wishlist createWishlist(Wishlist wishlist) throws WishlistException {
+//		if (wishlist == null) {
+//			throw new WishlistException("Wishlist cannot be null!");
+//		}
+//		Wishlist wishlistAdded;
+//
+//		try {
+//
+//			wishlistAdded = this.wishlistRepository.save(wishlist);
+//		} catch (Exception e) {
+//			throw new WishlistException("Wishlist could not be created");
+//		}
+//		return wishlistAdded;
+//	}
 
 	@Override
 	public Wishlist getWishlistById(Integer wishlistId) throws WishlistException {
@@ -62,22 +62,22 @@ public class WishlistServiceImpl implements WishlistService {
 
 	}
 
-	@Override
-	public String removeWishlistById(Integer wishlistId) throws WishlistException {
-		if(wishlistId == null) {
-			throw new WishlistException("Wishlist cannot be null");
-		}
-		String isDeleted;
-		Optional<Wishlist> foundWishlist = this.wishlistRepository.findById(wishlistId);
-		if (!foundWishlist.isEmpty()) {
-			this.wishlistRepository.deleteById(wishlistId);
-			isDeleted = "Successful";
-		} else {
-			throw new WishlistException("wishlist does not exist");
-		}
-		return isDeleted;
-
-	}
+//	@Override
+//	public String removeWishlistById(Integer wishlistId) throws WishlistException {
+//		if(wishlistId == null) {
+//			throw new WishlistException("Wishlist cannot be null");
+//		}
+//		String isDeleted;
+//		Optional<Wishlist> foundWishlist = this.wishlistRepository.findById(wishlistId);
+//		if (!foundWishlist.isEmpty()) {
+//			this.wishlistRepository.deleteById(wishlistId);
+//			isDeleted = "Successful";
+//		} else {
+//			throw new WishlistException("wishlist does not exist");
+//		}
+//		return isDeleted;
+//
+//	}
 
 	@Override
 	public List<Wishlist> getAllWishlist() throws WishlistException {

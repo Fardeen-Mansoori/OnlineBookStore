@@ -47,4 +47,10 @@ public class AdminController {
 		return this.adminService.deleteAdmin(adminId, adminPassword);
 
 	}
+	
+	@PostMapping("admin/login/{adminId}/{adminPassword}")
+	public Boolean login(@PathVariable Integer adminId,@PathVariable String adminPassword) throws AdminException {
+		return this.adminService.login(adminId, adminPassword);
+
+	}
 }

@@ -35,6 +35,14 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+
 	public Integer getUserId() {
 		return userId;
 	}

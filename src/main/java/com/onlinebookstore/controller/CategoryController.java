@@ -20,7 +20,7 @@ public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
 	
-	@PostMapping("category/add")
+	@PostMapping("category")
 	public Category addCategory(@RequestBody Category category) throws CategoryException {
 		Category foundCategory = null;
 		try {
@@ -32,25 +32,25 @@ public class CategoryController {
 		
 	}
 
-	@GetMapping("category/get/{categoryId}")
+	@GetMapping("category/{categoryId}")
 	public Category getCategory(@PathVariable Integer categoryId) throws CategoryException {
 		return this.categoryService.getCategoryByCategoryId(categoryId);
 
 	}
 
-	@PutMapping("category/update")
+	@PutMapping("category")
 	public Category updateCategory(@RequestBody Category category) throws CategoryException {
 		return this.categoryService.updateCategory(category);
 		
 	}
 
-	@DeleteMapping("category/delete/{categoryId}")
+	@DeleteMapping("category/{categoryId}")
 	public String deleteCategoryById(@PathVariable Integer categoryId) throws CategoryException {
 		return this.categoryService.deleteCategoryById(categoryId);
 		
 	}
 
-	@GetMapping("category/categories")
+	@GetMapping("categories")
 	public List<Category> getAllCategories() throws CategoryException{
 		return this.categoryService.getAllCategory();
 	}

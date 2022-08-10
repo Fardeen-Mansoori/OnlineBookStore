@@ -28,6 +28,10 @@ public class Wishlist {
 		super();
 
 	}
+	public Wishlist(Integer wishlistId) {
+		super();
+		this.wishlistId = wishlistId;
+	}
 	
 	public Wishlist( User user, List<Book> book, Date dateOfCreation) {
 		super();

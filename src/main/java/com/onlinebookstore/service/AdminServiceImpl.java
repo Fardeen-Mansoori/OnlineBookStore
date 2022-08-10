@@ -63,4 +63,20 @@ public class AdminServiceImpl implements AdminService {
 		return this.adminRepository.findAll();
 	}
 
+	@Override
+	public Boolean login(Integer adminId, String adminPassword) throws AdminException {
+		boolean isLogedin=false;
+		Optional<Admin> foundAdmin = this.adminRepository.findById(adminId);
+		if (foundAdmin.isEmpty()) {
+			throw new AdminException("Admin doesnot exists for id " + adminId);
+		}
+		if (!foundAdmin.get().getAdminPassword().equals(adminPassword)) {
+			throw new AdminException("Incorrect password");
+		}
+		if (foundAdmin.get().getAdminPassword().equals(adminPassword)) {
+			isLogedin=true;
+		}
+		return isLogedin;
+	}
+
 }

@@ -21,7 +21,7 @@ public class BookController {
 @Autowired
 BookService bookService;
 
-@PostMapping("book/add")
+@PostMapping("book")
 public Book addBook(@RequestBody Book book) {
 	 Book foundBook=null;
 	try {
@@ -39,20 +39,20 @@ public Book getBook(@PathVariable Integer bookId) throws BookException {
 
 }
 
-@PutMapping("book/update")
+@PutMapping("book")
 public Book updateBook(@RequestBody Book book) throws BookException {
 	return this.bookService.updateBook(book);
 	
 }
 
 
-@DeleteMapping("book/delete/{bookId}")
+@DeleteMapping("book/{bookId}")
 public String deleteBookById(@PathVariable Integer bookId) throws BookException {
 	return this.bookService.deleteBookById(bookId);
 	
 }
 
-@GetMapping("book/books")
+@GetMapping("books")
 public List<Book> getAllBooks() throws BookException{
 	return this.bookService.getAllBooks();
 }

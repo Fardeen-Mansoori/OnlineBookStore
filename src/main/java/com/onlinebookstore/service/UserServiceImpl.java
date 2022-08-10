@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.onlinebookstore.dao.CartRepository;
 import com.onlinebookstore.dao.UserRepository;
+import com.onlinebookstore.dao.WishlistRepository;
 import com.onlinebookstore.dto.Cart;
 import com.onlinebookstore.dto.User;
+import com.onlinebookstore.dto.Wishlist;
 import com.onlinebookstore.exception.UserException;
 
 @Service
@@ -18,7 +20,8 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 	@Autowired
 	CartRepository cartRepository;
-
+	@Autowired
+	WishlistRepository wishlistRepository;
 	@Override
 	public User registerUser(User user) throws UserException {
 		// TODO Auto-generated method stub
@@ -29,9 +32,10 @@ public class UserServiceImpl implements UserService {
 		if (!(foundUser.isEmpty())) {
 			throw new UserException("User already exists!");
 		}
-		this.cartRepository.save(new Cart(user.getUserId()));
-
-		return this.userRepository.save(user);
+		this.wishlistRepository.save(new Wishlist(user.getUserId()));
+		User saveUser=this.userRepository.save(user);
+		this.cartRepository.save(new Cart(user.getUserId(),user));
+		return saveUser;
 	}
 
 	@Override
@@ -67,8 +71,9 @@ public class UserServiceImpl implements UserService {
 		if (foundUser.isEmpty()) {
 			throw new UserException("User does not exist for id " + userId);
 		} else {
+			this.cartRepository.delete(new Cart(foundUser.get().getUserId(),foundUser.get()));
+			this.wishlistRepository.delete(new Wishlist(foundUser.get().getUserId()));
 			userRepository.delete(foundUser.get());
-			this.cartRepository.delete(new Cart(foundUser.get().getUserId()));
 			isDeleted = "Successful";
 		}
 		return isDeleted;
