@@ -1,6 +1,12 @@
 package com.onlinebookstore.dto;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -9,13 +15,39 @@ public class UserPayment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
+	@NotNull(message = "Payment type can not be null")
+	@NotBlank(message="Payment type can not be blank")
+	@Size(min=3,max = 25,message = "payment type must be of minimum 3 characters and maximum of 25 characters")
 	private String type;
+	
+	@NotNull(message = "CardName can not be null")
+	@NotBlank(message="CardName can not be blank")
+	@Size(min=3,max = 30,message = "CardName must be of minimum 3 characters and maximum of 30 characters")
 	private String cardName;
+	
+	@NotNull(message = "CardNumber can not be null")
+	@NotBlank(message="CardNumber can not be blank")
+	@Size(min=16,max =16,message = "CardNumber must be of 16 digits")
 	private String cardNumber;
+	
+	@NotNull(message="Expiry month cannot be null")
+	@Min(1)
+	@Max(12)
 	private int expiryMonth;
+	
+	@NotNull
 	private int expiryYear;
+
+	@NotNull(message = "cvc cannot be null")
+	@Digits(message="cvc must contain 3 digits.", fraction = 0, integer = 3)
 	private int cvc;
+	
+	@NotNull(message = "Holder name can not be null")
+	@NotBlank(message="Holder name can not be blank")
+	@Size(min=3,max = 30,message = "Holder name must be of minimum 3 characters and maximum of 30 characters")
 	private String holderName;
+	
 	private boolean defaultPayment;
 	@ManyToOne
 	private User user;
