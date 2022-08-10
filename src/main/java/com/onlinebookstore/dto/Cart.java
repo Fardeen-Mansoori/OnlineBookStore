@@ -10,14 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.onlinebookstore.dao.UserRepository;
+
 @Entity
 public class Cart {
+	//@Autowired
+	//UserRepository userRepository;
+	
 	@Id
 	private Integer cartId;
 	private Double cartTotal;
 	private Integer bookQuantity;
 	@OneToOne
-	private User userId;
+	private User user;
 	@OneToMany
 	private List<Book> book;
 
@@ -27,17 +34,19 @@ public class Cart {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cart(Integer cartId) {
+
+	public Cart(Integer cartId,User user) {
 		super();
 		this.cartId = cartId;
+		this.user=user;
 	}
 
-	public Cart(Integer cartId, Double cartTotal, Integer bookQuantity, User userId, List<Book> book) {
+	public Cart(Integer cartId, Double cartTotal, Integer bookQuantity,User user, List<Book> book) {
 		super();
 		this.cartId = cartId;
 		this.cartTotal = cartTotal;
 		this.bookQuantity = bookQuantity;
-		this.userId = userId;
+		this.user = user;
 		this.book = book;
 	}
 
@@ -57,12 +66,12 @@ public class Cart {
 		this.cartTotal = cartTotal;
 	}
 
-	public User getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(User userId) {
-		this.userId = userId;
+	public void setUserId(User user) {
+		this.user = user;
 	}
 
 	public List<Book> getBook() {
@@ -83,7 +92,7 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "CartDetails [cartId=" + cartId + ", cartTotal=" + cartTotal + ", userId=" + userId + ", bookId=" + book
+		return "CartDetails [cartId=" + cartId + ", cartTotal=" + cartTotal + ", user=" + user + ", bookId=" + book
 				+ ", bookQuantity=" + bookQuantity + "]";
 	}
 

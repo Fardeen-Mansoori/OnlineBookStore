@@ -20,34 +20,34 @@ public class WishlistController {
 	@Autowired
 	WishlistService wishlistService;
 
-	@GetMapping("wishlist/get/{wishlistId}")
+	@GetMapping("wishlist/{wishlistId}")
 	public Wishlist getWishlistById(@PathVariable Integer wishlistId) throws WishlistException {
 		return this.wishlistService.getWishlistById(wishlistId);
 	}
 
-	@PostMapping("wishlist/create")
-	public Wishlist createWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
-		Wishlist foundWishlist = null;
-		try {
-			foundWishlist = this.wishlistService.createWishlist(foundWishlist);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return foundWishlist;
+//	@PostMapping("wishlist")
+//	public Wishlist createWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
+//		Wishlist foundWishlist = null;
+//		try {
+//			foundWishlist = this.wishlistService.createWishlist(foundWishlist);
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//		return foundWishlist;
+//
+//	}
 
-	}
-
-	@PutMapping("wishlist/update")
+	@PutMapping("wishlist")
 	public Wishlist updateWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
 		return this.wishlistService.updateWishlist(wishlist);
 	}
 
-	@DeleteMapping("wishlist/delete/{wishlistId}")
-	public String deleteWishlist(@PathVariable Integer wishlistId) throws WishlistException {
-		return this.wishlistService.removeWishlistById(wishlistId);
-	}
+//	@DeleteMapping("wishlist/{wishlistId}")
+//	public String deleteWishlist(@PathVariable Integer wishlistId) throws WishlistException {
+//		return this.wishlistService.removeWishlistById(wishlistId);
+//	}
 
-	@GetMapping("wishlist/wishlists")
+	@GetMapping("wishlists")
 	public List<Wishlist> getAllWishlists() throws WishlistException {
 		return this.wishlistService.getAllWishlist();
 	}

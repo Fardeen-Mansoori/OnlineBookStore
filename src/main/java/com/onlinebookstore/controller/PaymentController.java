@@ -18,7 +18,7 @@ public class PaymentController {
 	@Autowired
 	 PaymentService paymentService;
 
-	@PostMapping("payment/create")
+	@PostMapping("payment")
 	public Payment createPayment(@RequestBody Payment payment) throws PaymentException {
 		Payment foundPayment = null;
 		try {
@@ -30,7 +30,7 @@ public class PaymentController {
 
 	}
 
-	@GetMapping("payment/view/{paymentId}")
+	@GetMapping("payment/{paymentId}")
 	public Payment getPaymentById(@PathVariable Integer paymentId) throws PaymentException {
 		return this.paymentService.getPaymentById(paymentId);
 

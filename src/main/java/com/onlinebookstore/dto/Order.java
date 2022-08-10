@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -20,11 +22,13 @@ import javax.persistence.Table;
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer orderId;
+	public Integer orderId;
 
 	
-	private LocalDate orderDate= LocalDate.now();
+	private LocalDate orderDate=LocalDate.now();
 	private LocalDate deliveryDate=LocalDate.now().plusDays(7);
+	@NotNull
+	@Size(min=5, max=30)
 	private String shippingAddress;
 	@OneToMany
 	private List<Book> book;
@@ -35,11 +39,10 @@ public class Order {
 		super();
 
 	}
+	
+	
 	public Order(String shippingAddress, List<Book> book, User user) {
 		super();
-		this.orderDate=LocalDate.now();;
-		this.deliveryDate=LocalDate.parse("2022-08-04").plusDays(7);
-		//this.deliveryDate = deliveryDate.plusDays(7);
 		this.shippingAddress = shippingAddress;
 		this.book = book;
 		this.user = user;

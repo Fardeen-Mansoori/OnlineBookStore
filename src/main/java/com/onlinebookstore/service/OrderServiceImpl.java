@@ -3,9 +3,14 @@ package com.onlinebookstore.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.Generated;
+import javax.persistence.GeneratedValue;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.onlinebookstore.dao.CartRepository;
 import com.onlinebookstore.dao.OrderRepository;
 import com.onlinebookstore.dao.UserRepository;
@@ -22,9 +27,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	CartRepository cartRepository;
 
-	@Autowired
-	UserRepository userRepository;
-
+	
 	@Override
 	public Order placeOrder(Order order) throws OrderException {
 
@@ -34,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
 		if (order == null) {
 			throw new OrderException("Order cannot be null");
 		}
-		this.cartRepository.deleteAll();
+		//this.cartRepository.deleteAll();
 		return this.orderRepository.save(order);
 	}
 
@@ -90,26 +93,25 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order OrderFromcart(Integer userId) throws OrderException {
-		if(userId==null) {
+	public Order OrderFromcart(Integer cartId) throws OrderException {
+		if(cartId==null) {
 			throw new OrderException("Enter valid userId");
 		}
-		Optional<User> user = this.userRepository.findById(userId);
-		if(user.isEmpty()) {
-			throw new OrderException("User doesnot exist for userid"+userId);
-		}
-		Optional<Cart> cart = this.cartRepository.findById(userId);
+		Optional<Cart> cart = this.cartRepository.findById(cartId);
 		
 		if(cart.isEmpty()) {
-			throw new OrderException("Cart doesnot exist for cartid"+userId);
+			throw new OrderException("Cart doesnot exist for cartid"+cartId);
 		}
-		Order order = new Order();
-		order.setOrderId(order.getOrderId());
+		Order order = new Order(null,null,null);
+		List<Order> orders=this.orderRepository.findAll();
+		Order lastElement=orders.get(orders.size() - 1);
+		Integer orderId=lastElement.orderId;
+		order.setOrderId(orderId+1);
         order.setBook(cart.get().getBook());
-		order.setShippingAddress(user.get().getUserAddress());
-		order.setUser(user.get());
+		order.setShippingAddress(cart.get().getUser().getUserAddress());
+		order.setUser(cart.get().getUser());
+		this.orderRepository.save(order);
 		return order;
-
 	}
 
 }

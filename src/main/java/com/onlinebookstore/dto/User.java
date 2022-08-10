@@ -6,16 +6,41 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User {
 	@Id
 	private Integer userId;
+
+	//@NotNull(message = "Password can not be null")
+	//@NotEmpty(message = "Password can not be empty")
+	//@NotBlank(message = "Password can not be blank")
+	//@Size(min = 6, max = 25, message = "Password must be of minimum 6 characters and maximum of 25 characters")
 	private String userPassword;
+
+	@NotNull(message = "Name can not be null")
+	@NotEmpty(message = "Name can not be empty")
+	@NotBlank(message = "Name can not be blank")
+	@Size(min = 3, max = 30, message = "Name must be of minimum 3 characters and maximum of 30 characters")
 	private String userName;
+
+	@Email(message = "Email should be valid")
 	private String userEmail;
+
+	@NotBlank(message = "Address field can not be blank")
+	@NotNull(message = "Address can not be null")
 	private String userAddress;
-	private Integer userContact;
+
+	@NotBlank(message = "Phone number is mandetory.")
+	@Pattern(regexp = "[0-9]{10}", message = "Phone number must be 10 digits[0-9].")
+	private String userContact;
+
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
 
@@ -24,7 +49,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Integer userId, String userName, String userEmail, String userAddress, Integer userContact,
+	public User(Integer userId, String userName, String userEmail, String userAddress, String userContact,
 			Date dateOfBirth) {
 		super();
 		this.userId = userId;
@@ -33,6 +58,14 @@ public class User {
 		this.userAddress = userAddress;
 		this.userContact = userContact;
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
 	public Integer getUserId() {
@@ -67,11 +100,11 @@ public class User {
 		this.userAddress = userAddress;
 	}
 
-	public Integer getUserContact() {
+	public String getUserContact() {
 		return userContact;
 	}
 
-	public void setUserContact(Integer userContact) {
+	public void setUserContact(String userContact) {
 		this.userContact = userContact;
 	}
 
