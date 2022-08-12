@@ -3,14 +3,26 @@ package com.onlinebookstore.dto;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Book {
 	@Id
 	private Integer bookId;
+	@NotNull(message="Name cannot be null")
+	@NotBlank()
 	private String bookName;
+	@NotNull(message="BookDescription cannot be null")
+	@NotBlank()
 	private String bookDescription;
+	@NotNull(message="AuthorName cannot be null")
+	@NotBlank()
 	private String bookAuthor;
+	@NotNull(message="Price cannot be null")
+	@NotBlank()
+	@Min(value=10, message="Min price can be 10")
 	private Double bookPrice;
 	@ManyToOne
 	private Category category;

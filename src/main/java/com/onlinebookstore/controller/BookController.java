@@ -22,14 +22,15 @@ public class BookController {
 BookService bookService;
 
 @PostMapping("book")
-public Book addBook(@RequestBody Book book) {
-	 Book foundBook=null;
-	try {
-		foundBook=this.bookService.addBook(book);
-	} catch (BookException e) {
-		System.out.println(e.getMessage());
-	}
-	return foundBook;
+public Book addBook(@RequestBody Book book) throws BookException {
+	return this.bookService.addBook(book);
+//	 Book foundBook=null;
+//	try {
+//		foundBook=this.bookService.addBook(book);
+//	} catch (BookException e) {
+//		throw new BookException(e.getMessage());
+//	}
+//	return foundBook;
 	
 }
 
