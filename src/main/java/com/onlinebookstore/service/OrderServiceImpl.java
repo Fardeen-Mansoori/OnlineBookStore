@@ -102,16 +102,17 @@ public class OrderServiceImpl implements OrderService {
 		if(cart.isEmpty()) {
 			throw new OrderException("Cart doesnot exist for cartid"+cartId);
 		}
-		Order order = new Order(null,null,null);
-		List<Order> orders=this.orderRepository.findAll();
-		Order lastElement=orders.get(orders.size() - 1);
-		Integer orderId=lastElement.orderId;
-		order.setOrderId(orderId+1);
+		Order order = new Order();
+		//List<Order> orders=this.orderRepository.findAll();
+		//Order lastElement=orders.get(orders.size() - 1);
+		//Integer orderId=lastElement.orderId;
+		//order.setOrderId(orderId+1);
         order.setBook(cart.get().getBook());
 		order.setShippingAddress(cart.get().getUser().getUserAddress());
 		order.setUser(cart.get().getUser());
-		this.orderRepository.save(order);
-		return order;
+		return placeOrder(order);
+		//this.orderRepository.save(order);
+		//return order;
 	}
 
 }

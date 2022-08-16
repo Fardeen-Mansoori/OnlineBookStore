@@ -21,7 +21,7 @@ public class Book {
 	@NotBlank()
 	private String bookAuthor;
 	@NotNull(message="Price cannot be null")
-	@NotBlank()
+	//@NotBlank()
 	@Min(value=10, message="Min price can be 10")
 	private Double bookPrice;
 	@ManyToOne

@@ -16,7 +16,7 @@ public class PaymentTest {
 	@Autowired
 	PaymentService paymentService;
 
-	Payment payment = new Payment("", "", "", 0, 0, 0, "", null, null);
+	Payment payment = new Payment("", "", "", 0, 0, 0, "", null);
 
 	@Test
 	public void createPaymentTest() throws PaymentException {

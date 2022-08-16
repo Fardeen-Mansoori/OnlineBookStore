@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.onlinebookstore.dao.PaymentRepository;
 import com.onlinebookstore.dto.Payment;
-import com.onlinebookstore.dto.UserPayment;
+
 import com.onlinebookstore.exception.PaymentException;
 
 @Service
@@ -15,19 +15,7 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	PaymentRepository paymentRepository;
 
-	@Override
-	public Payment setByUserPayment(UserPayment userPayment, Payment payment) throws PaymentException {
-		payment.setType(userPayment.getType());
-		payment.setHolderName(userPayment.getHolderName());
-		payment.setCardName(userPayment.getCardName());
-		payment.setExpiryMonth(userPayment.getExpiryMonth());
-		payment.setExpiryYear(userPayment.getExpiryYear());
-		payment.setCvc(userPayment.getCvc());
-		payment.setCardNumber(userPayment.getCardNumber());
-
-		return payment;
-
-	}
+	
 
 	@Override
 	public Payment createPayment(Payment payment) throws PaymentException {

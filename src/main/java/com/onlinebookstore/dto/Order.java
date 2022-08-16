@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,8 +26,8 @@ public class Order {
 	public Integer orderId;
 
 	
-	private LocalDate orderDate=LocalDate.now();
-	private LocalDate deliveryDate=LocalDate.now().plusDays(7);
+	private LocalDate orderDate = LocalDate.now();
+	private LocalDate deliveryDate = LocalDate.now().plusDays(7);
 	@NotNull
 	@Size(min=5, max=30)
 	private String shippingAddress;
@@ -34,20 +35,24 @@ public class Order {
 	private List<Book> book;
 	@ManyToOne
 	private User user;
-
+	
+	@OneToOne
+	Payment payment;
+	
 	public Order() {
 		super();
 
 	}
 	
 	
-	public Order(String shippingAddress, List<Book> book, User user) {
+	public Order(String shippingAddress, List<Book> book, User user, Payment payment) {
 		super();
 		this.shippingAddress = shippingAddress;
 		this.book = book;
 		this.user = user;
-
+		this.payment = payment;
 	}
+
 
 	public Integer getOrderId() {
 		return orderId;
@@ -91,6 +96,18 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
 
 	@Override
 	public String toString() {

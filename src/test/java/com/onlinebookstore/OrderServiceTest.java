@@ -5,6 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.onlinebookstore.dao.OrderRepository;
 import com.onlinebookstore.dto.Order;
+import com.onlinebookstore.dto.Payment;
 import com.onlinebookstore.exception.OrderException;
 import com.onlinebookstore.service.OrderService;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,8 @@ OrderService orderService;
 @Autowired
 OrderRepository orderRepository;
 
-Order order = new Order("abc",null,null);
+Payment payment = new Payment();
+Order order = new Order("abc",null,null, payment);
 
 @Test
 public void placeOrderTest() throws OrderException {

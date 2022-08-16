@@ -54,8 +54,7 @@ public class Payment {
 	@OneToOne
 	private Order order;
 	
-	@OneToOne //(mappedBy = "userPayment")
-	private UserBilling userBilling;
+	
 
 	public Payment() {
 		super();
@@ -63,7 +62,7 @@ public class Payment {
 	}
 
 	public Payment(String type, String cardName, String cardNumber, int expiryMonth, int expiryYear,
-			int cvc, String holderName, Order order, UserBilling userBilling) {
+			int cvc, String holderName, Order order) {
 		super();
 		
 		this.type = type;
@@ -74,7 +73,7 @@ public class Payment {
 		this.cvc = cvc;
 		this.holderName = holderName;
 		this.order = order;
-		this.userBilling = userBilling;
+		
 	}
 
 	public Integer getPaymentId() {
@@ -149,14 +148,6 @@ public class Payment {
 		this.order = order;
 	}
 
-	public UserBilling getUserBilling() {
-		return userBilling;
-	}
-
-	public void setUserBilling(UserBilling userBilling) {
-		this.userBilling = userBilling;
-	}
-	
 	
 
 }
