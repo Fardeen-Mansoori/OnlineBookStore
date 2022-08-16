@@ -1,6 +1,7 @@
 package com.onlinebookstore.service;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +88,22 @@ public class UserServiceImpl implements UserService {
 			throw new UserException("No Users Found!");
 		}
 		return userList;
+	}
+	
+	
+	@Override
+	public Boolean login(Integer userId,String userPassword) throws UserException {
+		boolean isLogedin=false;
+		Optional<User> foundUser = this.userRepository.findById(userId);
+		if (foundUser.isEmpty()) {
+			throw new UserException("User doesnot exists for id " + userId);
+		}
+		if (!foundUser.get().getUserPassword().equals(userPassword)) {
+			throw new UserException("Incorrect password");
+		}
+		if (foundUser.get().getUserPassword().equals(userPassword)) {
+			isLogedin=true;
+		}
+		return isLogedin;
 	}
 }

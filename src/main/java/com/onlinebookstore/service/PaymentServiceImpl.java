@@ -28,7 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
 		Optional<Payment> foundPayment = paymentRepository.findById(paymentId);
 
 		if (foundPayment.isEmpty()) {
-			throw new PaymentException("Payment doesn't exists for Id :" + paymentId);
+			throw new PaymentException("Payment doesn't exists for Id : " + paymentId);
 
 		}
 

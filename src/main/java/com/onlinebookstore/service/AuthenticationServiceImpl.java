@@ -12,18 +12,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	UserService userService;
+	
 	@Override
 	public Boolean adminlogin(Authentication authentication) throws AdminException {
-		Integer adminIdInteger=authentication.getId();
-		String password=authentication.getPassword();
-		this.adminService.login(adminIdInteger, password);
+		Integer adminId=authentication.getId();
+		String adminPassword=authentication.getPassword();
+		this.adminService.login(adminId, adminPassword);
 		return true;
 	}
 
 	@Override
 	public Boolean userLogin(Authentication authentication) throws UserException {
-		// TODO Auto-generated method stub
-		return null;
+		Integer userId=authentication.getId();
+		String userpassword=authentication.getPassword();
+		this.userService.login(userId, userpassword);
+		return true;
 	}
 
 }

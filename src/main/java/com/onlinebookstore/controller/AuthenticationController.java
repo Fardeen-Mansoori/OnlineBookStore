@@ -19,15 +19,15 @@ public class AuthenticationController {
 	AuthenticationService authenticationService;
 	
 	
-	@PostMapping("authentication/login")
+	@PostMapping("admin/login")
 	public Boolean adminlogin(@RequestBody Authentication authentication) throws AdminException {
 		return this.authenticationService.adminlogin(authentication);
 
 	}
 	
-//	@PostMapping("user/login")
-//	public Boolean userLogin(@RequestBody User user) throws UserException {
-//		return this.authenticationService.userLogin(user);
-//
-//	}
+	@PostMapping("user/login")
+	public Boolean userLogin(@RequestBody Authentication authentication) throws UserException {
+		return this.authenticationService.userLogin(authentication);
+
+	}
 }
