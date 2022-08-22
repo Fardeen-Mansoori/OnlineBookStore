@@ -20,16 +20,23 @@ import com.onlinebookstore.service.UserService;
 
 @RestController
 public class UserController {
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@PostMapping("user")
+<<<<<<< Updated upstream
 	public User registerUser(@Valid @RequestBody User user) throws UserException, MethodArgumentNotValidException {
 		
 			return this.userService.registerUser(user);
 		
 		
+=======
+	public User registerUser(@RequestBody User user) throws UserException {
+
+		return this.userService.registerUser(user);
+
+>>>>>>> Stashed changes
 	}
 
 	@GetMapping("user/{userId}")
@@ -41,17 +48,17 @@ public class UserController {
 	@PutMapping("user")
 	public User updateUser(@Valid @RequestBody User user) throws UserException, MethodArgumentNotValidException {
 		return this.userService.updateUser(user);
-		
+
 	}
 
 	@DeleteMapping("user/{userId}")
 	public String deleteUserById(@PathVariable Integer userId) throws UserException {
 		return this.userService.deleteUserById(userId);
-		
+
 	}
 
 	@GetMapping("users")
-	public List<User> getAllUsers() throws UserException{
+	public List<User> getAllUsers() throws UserException {
 		return this.userService.getAllUser();
 	}
 
