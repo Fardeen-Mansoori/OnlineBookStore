@@ -19,12 +19,16 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class User {
 	@Id
 	private Integer userId;
+	
 
+    @JsonProperty(access = Access.WRITE_ONLY)
 	private String userPassword;
 
 	@NotNull(message = "Name can not be null")

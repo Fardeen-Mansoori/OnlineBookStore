@@ -25,18 +25,11 @@ public class UserController {
 	UserService userService;
 
 	@PostMapping("user")
-<<<<<<< Updated upstream
+
 	public User registerUser(@Valid @RequestBody User user) throws UserException, MethodArgumentNotValidException {
 		
 			return this.userService.registerUser(user);
 		
-		
-=======
-	public User registerUser(@RequestBody User user) throws UserException {
-
-		return this.userService.registerUser(user);
-
->>>>>>> Stashed changes
 	}
 
 	@GetMapping("user/{userId}")
