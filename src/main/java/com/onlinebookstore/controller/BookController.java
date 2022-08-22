@@ -2,7 +2,10 @@ package com.onlinebookstore.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,44 +21,36 @@ import com.onlinebookstore.service.BookService;
 
 @RestController
 public class BookController {
-@Autowired
-BookService bookService;
+	@Autowired
+	BookService bookService;
 
-@PostMapping("book")
-public Book addBook(@RequestBody Book book) throws BookException {
-	return this.bookService.addBook(book);
-//	 Book foundBook=null;
-//	try {
-//		foundBook=this.bookService.addBook(book);
-//	} catch (BookException e) {
-//		throw new BookException(e.getMessage());
-//	}
-//	return foundBook;
-	
-}
+	@PostMapping("book")
+	public Book addBook(@Valid @RequestBody Book book) throws BookException, MethodArgumentNotValidException {
+		return this.bookService.addBook(book);
 
-@GetMapping("book/{bookId}")
-public Book getBook(@PathVariable Integer bookId) throws BookException {
-	return this.bookService.getBookById(bookId);
+	}
 
-}
+	@GetMapping("book/{bookId}")
+	public Book getBook(@PathVariable Integer bookId) throws BookException {
+		return this.bookService.getBookById(bookId);
 
-@PutMapping("book")
-public Book updateBook(@RequestBody Book book) throws BookException {
-	return this.bookService.updateBook(book);
-	
-}
+	}
 
+	@PutMapping("book")
+	public Book updateBook(@Valid @RequestBody Book book) throws BookException, MethodArgumentNotValidException {
+		return this.bookService.updateBook(book);
 
-@DeleteMapping("book/{bookId}")
-public String deleteBookById(@PathVariable Integer bookId) throws BookException {
-	return this.bookService.deleteBookById(bookId);
-	
-}
+	}
 
-@GetMapping("books")
-public List<Book> getAllBooks() throws BookException{
-	return this.bookService.getAllBooks();
-}
-	
+	@DeleteMapping("book/{bookId}")
+	public String deleteBookById(@PathVariable Integer bookId) throws BookException {
+		return this.bookService.deleteBookById(bookId);
+
+	}
+
+	@GetMapping("books")
+	public List<Book> getAllBooks() throws BookException {
+		return this.bookService.getAllBooks();
+	}
+
 }

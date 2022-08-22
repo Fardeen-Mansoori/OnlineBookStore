@@ -1,22 +1,20 @@
 package com.onlinebookstore.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.Generated;
-import javax.persistence.GeneratedValue;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.onlinebookstore.dao.CartRepository;
 import com.onlinebookstore.dao.OrderRepository;
-import com.onlinebookstore.dao.UserRepository;
 import com.onlinebookstore.dto.Cart;
+import com.onlinebookstore.dto.CartItem;
 import com.onlinebookstore.dto.Order;
+import com.onlinebookstore.dto.Payment;
 import com.onlinebookstore.dto.User;
+import com.onlinebookstore.exception.CartException;
 import com.onlinebookstore.exception.OrderException;
 
 @Service
@@ -27,18 +25,40 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	CartRepository cartRepository;
 
+	@Autowired
+	CartItemService cartItemService;
 	
-	@Override
-	public Order placeOrder(Order order) throws OrderException {
+	@Autowired 
+	CartService cartService;
 
-//	Order orderCreated = null;
-//	orderCreated = this.orderRepository.save(order);
-//	return orderCreated;
-		if (order == null) {
-			throw new OrderException("Order cannot be null");
+	@Override
+	public Order placeOrder(User user, Cart cart, String shippingAddress, Payment payment) throws OrderException, CartException {
+
+		Order order = new Order();
+
+		order.setOrderStatus("created");
+		order.setPayment(payment);
+		order.setShippingAddress(shippingAddress);
+
+		List<CartItem> cartItemList = cartItemService.findByCart(cart);
+
+		for (CartItem cartItem : cartItemList) {
+
+			cartItem.setOrder(order);
+
 		}
-		//this.cartRepository.deleteAll();
-		return this.orderRepository.save(order);
+
+		order.setCartItemList(cartItemList);
+		order.setOrderDate(LocalDate.now());
+		order.setDeliveryDate(order.getOrderDate().plusDays(7));
+		order.setOrderTotal(cart.getCartTotal());
+
+		payment.setOrder(order);
+		order.setUser(user);
+		order = orderRepository.save(order);
+		cartService.clearCart(cart);
+		return order;
+
 	}
 
 	@Override
@@ -84,35 +104,6 @@ public class OrderServiceImpl implements OrderService {
 			throw new OrderException("Order doesnot exists for id " + order.getOrderId());
 		}
 		return this.orderRepository.save(order);
-	}
-
-	@Override
-	public String deleteAllOrders() throws OrderException {
-		this.orderRepository.deleteAll();
-		return "deleted successfully";
-	}
-
-	@Override
-	public Order OrderFromcart(Integer cartId) throws OrderException {
-		if(cartId==null) {
-			throw new OrderException("Enter valid userId");
-		}
-		Optional<Cart> cart = this.cartRepository.findById(cartId);
-		
-		if(cart.isEmpty()) {
-			throw new OrderException("Cart doesnot exist for cartid"+cartId);
-		}
-		Order order = new Order();
-		//List<Order> orders=this.orderRepository.findAll();
-		//Order lastElement=orders.get(orders.size() - 1);
-		//Integer orderId=lastElement.orderId;
-		//order.setOrderId(orderId+1);
-        order.setBook(cart.get().getBook());
-		order.setShippingAddress(cart.get().getUser().getUserAddress());
-		order.setUser(cart.get().getUser());
-		return placeOrder(order);
-		//this.orderRepository.save(order);
-		//return order;
 	}
 
 }

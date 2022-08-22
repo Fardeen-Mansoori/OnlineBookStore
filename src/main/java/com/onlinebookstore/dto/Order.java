@@ -1,11 +1,10 @@
 package com.onlinebookstore.dto;
 
-import java.text.ParseException;
-
 import java.time.LocalDate;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Orders")
@@ -25,34 +25,42 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer orderId;
 
-	
-	private LocalDate orderDate = LocalDate.now();
-	private LocalDate deliveryDate = LocalDate.now().plusDays(7);
+	private LocalDate orderDate;
+	private LocalDate deliveryDate;
+	private String orderStatus;
 	@NotNull
-	@Size(min=5, max=30)
+	@Size(min = 5, max = 30)
 	private String shippingAddress;
-	@OneToMany
-	private List<Book> book;
+	private Double orderTotal;
+
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private List<CartItem> cartItemList;
+
 	@ManyToOne
 	private User user;
-	
-	@OneToOne
-	Payment payment;
-	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	// @JsonIgnore
+	private Payment payment;
+
 	public Order() {
 		super();
 
 	}
-	
-	
-	public Order(String shippingAddress, List<Book> book, User user, Payment payment) {
+
+	public Order(Integer orderId, LocalDate orderDate, LocalDate deliveryDate, String orderStatus,
+			String shippingAddress, Double orderTotal, List<CartItem> cartItemList, User user, Payment payment) {
 		super();
+		this.orderId = orderId;
+		this.orderDate = orderDate;
+		this.deliveryDate = deliveryDate;
+		this.orderStatus = orderStatus;
 		this.shippingAddress = shippingAddress;
-		this.book = book;
+		this.orderTotal = orderTotal;
+		this.cartItemList = cartItemList;
 		this.user = user;
 		this.payment = payment;
 	}
-
 
 	public Integer getOrderId() {
 		return orderId;
@@ -66,12 +74,9 @@ public class Order {
 		return orderDate;
 	}
 
-
 	public LocalDate getDeliveryDate() {
 		return deliveryDate;
 	}
-
-
 
 	public String getShippingAddress() {
 		return shippingAddress;
@@ -81,12 +86,28 @@ public class Order {
 		this.shippingAddress = shippingAddress;
 	}
 
-	public List<Book> getBook() {
-		return book;
+	public Double getOrderTotal() {
+		return orderTotal;
 	}
 
-	public void setBook(List<Book> book) {
-		this.book = book;
+	public void setOrderTotal(Double orderTotal) {
+		this.orderTotal = orderTotal;
+	}
+
+	public void setOrderDate(LocalDate orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public void setDeliveryDate(LocalDate deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public List<CartItem> getCartItemList() {
+		return cartItemList;
+	}
+
+	public void setCartItemList(List<CartItem> cartItemList) {
+		this.cartItemList = cartItemList;
 	}
 
 	public User getUser() {
@@ -96,24 +117,21 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
 
 	public Payment getPayment() {
 		return payment;
 	}
 
-
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
 
-
-	@Override
-	public String toString() {
-		return "OrderDetails [orderId=" + orderId + ", orderDate=" + orderDate + 
-				", shippingAddress=" + shippingAddress + ", book=" + book + ", user=" + user + "]";
+	public String getOrderStatus() {
+		return orderStatus;
 	}
 
-	
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
 }

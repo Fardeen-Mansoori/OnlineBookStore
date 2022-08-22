@@ -23,20 +23,25 @@ public class UserServiceImpl implements UserService {
 	CartRepository cartRepository;
 	@Autowired
 	WishlistRepository wishlistRepository;
+
 	@Override
 	public User registerUser(User user) throws UserException {
 		// TODO Auto-generated method stub
-		if(user == null) {
+		if (user == null) {
 			throw new UserException("User cannot be Null!");
 		}
 		Optional<User> foundUser = this.userRepository.findById(user.getUserId());
 		if (!(foundUser.isEmpty())) {
 			throw new UserException("User already exists!");
 		}
-		this.wishlistRepository.save(new Wishlist(user.getUserId()));
-		User saveUser=this.userRepository.save(user);
-		this.cartRepository.save(new Cart(user.getUserId(),user));
-		return saveUser;
+		Cart cart = new Cart();
+		Wishlist wishlist = new Wishlist();
+		cart.setUser(user);
+		wishlist.setUser(user);
+		user.setCart(cart);
+		user.setWishlist(wishlist);
+
+		return this.userRepository.save(user);
 	}
 
 	@Override
@@ -52,7 +57,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateUser(User user) throws UserException {
 		// TODO Auto-generated method stub
-		if(user == null) {
+		if (user == null) {
 			throw new UserException("User cannot be Null!");
 		}
 		Optional<User> foundUser = this.userRepository.findById(user.getUserId());
@@ -67,12 +72,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String deleteUserById(Integer userId) throws UserException {
 
-		String isDeleted ;
+		String isDeleted;
 		Optional<User> foundUser = userRepository.findById(userId);
 		if (foundUser.isEmpty()) {
 			throw new UserException("User does not exist for id " + userId);
 		} else {
-			this.cartRepository.delete(new Cart(foundUser.get().getUserId(),foundUser.get()));
+			this.cartRepository.delete(new Cart(foundUser.get().getUserId(), foundUser.get()));
 			this.wishlistRepository.delete(new Wishlist(foundUser.get().getUserId()));
 			userRepository.delete(foundUser.get());
 			isDeleted = "Successful";
@@ -84,16 +89,15 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllUser() throws UserException {
 		// TODO Auto-generated method stub
 		List<User> userList = this.userRepository.findAll();
-		if(userList.isEmpty()) {
+		if (userList.isEmpty()) {
 			throw new UserException("No Users Found!");
 		}
 		return userList;
 	}
-	
-	
+
 	@Override
-	public Boolean login(Integer userId,String userPassword) throws UserException {
-		boolean isLogedin=false;
+	public Boolean login(Integer userId, String userPassword) throws UserException {
+		boolean isLogedin = false;
 		Optional<User> foundUser = this.userRepository.findById(userId);
 		if (foundUser.isEmpty()) {
 			throw new UserException("User doesnot exists for id " + userId);
@@ -102,7 +106,7 @@ public class UserServiceImpl implements UserService {
 			throw new UserException("Incorrect password");
 		}
 		if (foundUser.get().getUserPassword().equals(userPassword)) {
-			isLogedin=true;
+			isLogedin = true;
 		}
 		return isLogedin;
 	}

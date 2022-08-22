@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlinebookstore.dao.CategoryRepository;
+import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.dto.Category;
+import com.onlinebookstore.exception.BookException;
 import com.onlinebookstore.exception.CategoryException;
 
 @Service
@@ -82,5 +84,16 @@ public class CategoryServiceImpl implements CategoryService {
 			throw new CategoryException("No Category Found");
 		}
 		return this.categoryRepository.findAll();
+	}
+
+	@Override
+	public List<Book> findBycategoryName(String categoryName) throws CategoryException {
+		// TODO Auto-generated method stub
+		
+		Category  category = categoryRepository.findBycategoryName(categoryName);
+		if(category.getBook().isEmpty()) {
+			throw new CategoryException("No books found");
+		}
+		return category.getBook();
 	}
 }

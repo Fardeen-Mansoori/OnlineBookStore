@@ -81,4 +81,17 @@ public class BookServiceImpl implements BookService {
         }
 		return bookList;
 	}
+
+	
+
+	@Override
+	public List<Book> findByBookName(String bookName) throws BookException {
+		List<Book> bookList = bookRepository.findByBookName(bookName);
+		if(bookList.isEmpty()) {
+			throw new BookException("No books found");
+		}
+		return bookList;
+	}
+
+	
 }

@@ -2,17 +2,20 @@ package com.onlinebookstore.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+
 //import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.onlinebookstore.dao.UserRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cart {
@@ -20,13 +23,19 @@ public class Cart {
 	//UserRepository userRepository;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
 	private Double cartTotal;
-	private Integer bookQuantity;
-	@OneToOne
+	//private Integer bookQuantity;
+	
+	@OneToMany(mappedBy="cart", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	//@JsonIgnore
+	private List<CartItem> cartItemList;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
-	@OneToMany
-	private List<Book> book;
+	
+	
 
 	public Cart() {
 		super();
@@ -41,14 +50,17 @@ public class Cart {
 		this.user=user;
 	}
 
-	public Cart(Integer cartId, Double cartTotal, Integer bookQuantity,User user, List<Book> book) {
+	
+
+	public Cart(Integer cartId, Double cartTotal, List<CartItem> cartItemList, User user) {
 		super();
 		this.cartId = cartId;
 		this.cartTotal = cartTotal;
-		this.bookQuantity = bookQuantity;
+		//this.bookQuantity = bookQuantity;
+		this.cartItemList = cartItemList;
 		this.user = user;
-		this.book = book;
 	}
+
 
 	public Integer getCartId() {
 		return cartId;
@@ -74,26 +86,26 @@ public class Cart {
 		this.user = user;
 	}
 
-	public List<Book> getBook() {
-		return book;
+	
+	
+	public List<CartItem> getCartItemList() {
+		return cartItemList;
 	}
 
-	public void setBookId(List<Book> book) {
-		this.book = book;
+
+	public void setCartItemList(List<CartItem> cartItemList) {
+		this.cartItemList = cartItemList;
 	}
 
-	public Integer getBookQuantity() {
-		return bookQuantity;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public void setBookQuantity(Integer bookQuantity) {
-		this.bookQuantity = bookQuantity;
-	}
 
-	@Override
-	public String toString() {
-		return "CartDetails [cartId=" + cartId + ", cartTotal=" + cartTotal + ", user=" + user + ", bookId=" + book
-				+ ", bookQuantity=" + bookQuantity + "]";
-	}
+	
 
+	
+
+	
 }

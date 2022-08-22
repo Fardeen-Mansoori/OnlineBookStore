@@ -1,5 +1,7 @@
 package com.onlinebookstore.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +21,7 @@ public class PaymentController {
 	 PaymentService paymentService;
 
 	@PostMapping("payment")
-	public Payment createPayment(@RequestBody Payment payment) throws PaymentException {
+	public Payment createPayment(@Valid @RequestBody Payment payment) throws PaymentException {
 		Payment foundPayment = null;
 		try {
 			foundPayment = this.paymentService.createPayment(payment);

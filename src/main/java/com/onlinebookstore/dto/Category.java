@@ -1,7 +1,12 @@
 package com.onlinebookstore.dto;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Category {
@@ -9,15 +14,22 @@ public class Category {
 	private Integer categoryId;
 	private String categoryName;
 	private String categoryDescription;
+	
+	@OneToMany(mappedBy = "category")
+	@JsonIgnore
+	List<Book> book;
 	public Category() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Category(Integer categoryId, String categoryName, String categoryDescription) {
+	
+	
+	public Category(Integer categoryId, String categoryName, String categoryDescription, List<Book> book) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
 		this.categoryDescription = categoryDescription;
+		this.book = book;
 	}
 	public Integer getCategoryId() {
 		return categoryId;
@@ -37,10 +49,12 @@ public class Category {
 	public void setCategoryDescription(String categoryDescription) {
 		this.categoryDescription = categoryDescription;
 	}
-	@Override
-	public String toString() {
-		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryDescription="
-				+ categoryDescription + "]";
+	public List<Book> getBook() {
+		return book;
 	}
+	public void setBook(List<Book> book) {
+		this.book = book;
+	}
+	
 	
 }

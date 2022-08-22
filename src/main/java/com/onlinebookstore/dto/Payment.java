@@ -12,6 +12,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
   
 @Entity
 public class Payment {
@@ -52,6 +54,7 @@ public class Payment {
 	private String holderName;
 	//private String paymentStatus;
 	@OneToOne
+	@JsonIgnore
 	private Order order;
 	
 	
