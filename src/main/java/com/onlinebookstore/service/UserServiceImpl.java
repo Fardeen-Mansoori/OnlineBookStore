@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
 		Cart cart = new Cart();
 		Wishlist wishlist = new Wishlist();
 		cart.setUser(user);
+		cart.setCartTotal(0.0);
 		wishlist.setUser(user);
 		user.setCart(cart);
 		user.setWishlist(wishlist);

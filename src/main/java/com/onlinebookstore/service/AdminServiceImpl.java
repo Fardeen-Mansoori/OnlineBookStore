@@ -35,8 +35,8 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public String registerAdmin(Admin admin) throws AdminException {
 		String isRegistered ;
-		List<Admin> adminList = this.adminRepository.findAll();
-		if (!adminList.isEmpty()) {
+		Optional<Admin> foundAdmin = this.adminRepository.findById(admin.getAdminId());
+		if (!(foundAdmin.isEmpty())) {
 			throw new AdminException("Admin already exists!");
 		}
 		else {
