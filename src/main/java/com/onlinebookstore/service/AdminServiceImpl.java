@@ -35,6 +35,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public String registerAdmin(Admin admin) throws AdminException {
 		String isRegistered ;
+		if(admin == null) {
+			throw new AdminException("Enter valid admin details");
+		}
 		Optional<Admin> foundAdmin = this.adminRepository.findById(admin.getAdminId());
 		if (!(foundAdmin.isEmpty())) {
 			throw new AdminException("Admin already exists!");
@@ -89,6 +92,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public String updateAdmin(Admin admin) throws AdminException {
 		String isUpdated;
+		if(admin == null) {
+			throw new AdminException("Enter valid admin details");
+		}
 		Optional<Admin> foundAdmin = this.adminRepository.findById(admin.getAdminId());
 		if (foundAdmin.isEmpty()) {
 			throw new AdminException("Admin doesnot exists for id " + admin.getAdminId());
@@ -109,7 +115,9 @@ public class AdminServiceImpl implements AdminService {
 	 ************************************************************************************/
 	@Override
 	public List<Admin> getAdmin() throws AdminException {
-
+        if(this.adminRepository.findAll().isEmpty()) {
+        	throw new AdminException("No Admin found!");
+        }
 		return this.adminRepository.findAll();
 	}
 

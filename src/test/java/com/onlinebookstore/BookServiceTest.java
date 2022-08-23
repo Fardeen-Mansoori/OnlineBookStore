@@ -6,14 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import com.onlinebookstore.dao.BookRepository;
 import com.onlinebookstore.dto.Book;
-import com.onlinebookstore.dto.Category;
 import com.onlinebookstore.exception.BookException;
 import com.onlinebookstore.service.BookService;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 
 @SpringBootTest
 public class BookServiceTest {
@@ -50,7 +48,8 @@ public class BookServiceTest {
 		
 		assertNotNull(this.bookService.addBook(book));
 		book.setBookName("New Book");
-		assertEquals("New Book",book.getBookName());
+		assertNotNull(this.bookService.updateBook(book));
+		assertEquals("New Book",this.bookService.updateBook(book).getBookName());
 		assertThrows(BookException.class,()->this.bookService.updateBook(null));
 		
 	}
