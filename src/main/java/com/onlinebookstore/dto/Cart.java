@@ -28,11 +28,11 @@ public class Cart {
 	private Double cartTotal;
 	//private Integer bookQuantity;
 	
-	@OneToMany(mappedBy="cart", cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="cart", cascade=CascadeType.ALL)
 	//@JsonIgnore
 	private List<CartItem> cartItemList;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
 	
 	

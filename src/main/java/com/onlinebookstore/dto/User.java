@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Entity
 public class User {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer userId;
 
 	@NotNull(message = "Name can not be null")
@@ -44,10 +47,10 @@ public class User {
 	@Pattern(regexp = "[0-9]{10}", message = "Phone number must be 10 digits[0-9].")
 	private String userContact;
 
-	//@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	private LocalDate dateOfBirth;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
 
 	private Wishlist wishlist;
@@ -57,7 +60,7 @@ public class User {
 
 	private List<Order> orderList;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
 
 	private Cart cart;
@@ -66,7 +69,7 @@ public class User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public User(Integer userId, String userName, String userPassword, String userEmail, String userAddress,
 			String userContact, LocalDate dateOfBirth) {
 		super();
@@ -77,9 +80,8 @@ public class User {
 		this.userAddress = userAddress;
 		this.userContact = userContact;
 		this.dateOfBirth = dateOfBirth;
-		
-	}
 
+	}
 
 	public User(Integer userId, String userPassword, String userName, String userEmail, String userAddress,
 			String userContact, LocalDate dateOfBirth, Wishlist wishlist, List<Order> orderList, Cart cart) {
@@ -94,6 +96,17 @@ public class User {
 		this.wishlist = wishlist;
 		this.orderList = orderList;
 		this.cart = cart;
+	}
+
+	public User(String userName, String userPassword, String userEmail, String userAddress, String userContact,
+			LocalDate dateOfBirth) {
+		super();
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.userEmail = userEmail;
+		this.userAddress = userAddress;
+		this.userContact = userContact;
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getUserPassword() {
@@ -175,7 +188,5 @@ public class User {
 	public void setOrderList(List<Order> orderList) {
 		this.orderList = orderList;
 	}
-
-
 
 }

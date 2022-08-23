@@ -17,7 +17,7 @@ public class Wishlist {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer wishlistId;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	private User user;
 
 	@OneToMany

@@ -85,6 +85,27 @@ public class Payment {
 		this.order = order;
 		
 	}
+	
+
+	public Payment(Integer paymentId,
+			@NotNull(message = "Payment type can not be null") @NotBlank(message = "Payment type can not be blank") @Size(min = 3, max = 25, message = "payment type must be of minimum 3 characters and maximum of 25 characters") String type,
+			@NotNull(message = "CardName can not be null") @NotBlank(message = "CardName can not be blank") @Size(min = 3, max = 30, message = "CardName must be of minimum 3 characters and maximum of 30 characters") String cardName,
+			@NotNull(message = "CardNumber can not be null") @NotBlank(message = "CardNumber can not be blank") @Size(min = 16, max = 16, message = "CardNumber must be of 16 digits") @Pattern(regexp = "[0-9]{16}") String cardNumber,
+			@NotNull(message = "Expiry month cannot be null") @Min(1) @Max(12) int expiryMonth, @NotNull int expiryYear,
+			@NotNull(message = "cvc cannot be null") @Digits(message = "cvc must contain 3 digits.", fraction = 0, integer = 3) int cvc,
+			@NotNull(message = "Holder name can not be null") @NotBlank(message = "Holder name can not be blank") @Size(min = 3, max = 30, message = "Holder name must be of minimum 3 characters and maximum of 30 characters") String holderName,
+			Order order) {
+		super();
+		this.paymentId = paymentId;
+		this.type = type;
+		this.cardName = cardName;
+		this.cardNumber = cardNumber;
+		this.expiryMonth = expiryMonth;
+		this.expiryYear = expiryYear;
+		this.cvc = cvc;
+		this.holderName = holderName;
+		this.order = order;
+	}
 
 	public Integer getPaymentId() {
 		return paymentId;

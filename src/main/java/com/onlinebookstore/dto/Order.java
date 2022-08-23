@@ -38,7 +38,7 @@ public class Order {
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<CartItem> cartItemList;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	private User user;
 
 	@OneToOne(cascade = CascadeType.ALL)

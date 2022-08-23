@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.Payment;
 import com.onlinebookstore.exception.OrderException;
 import com.onlinebookstore.exception.PaymentException;
@@ -16,20 +17,22 @@ public class PaymentTest {
 	@Autowired
 	PaymentService paymentService;
 
-	Payment payment = new Payment("", "", "", 0, 0, 0, "", null);
+	
+	Order order = new Order();
+
+	Payment payment = new Payment(699,"card payment","visa card","1234567890123456",12,2028,123,"faisal",order);
 
 	@Test
 	public void createPaymentTest() throws PaymentException, OrderException {
-		// String type, String cardName, String cardNumber, int expiryMonth, int
-		// expiryYear,
-		// int cvc, String holderName, Order order, UserBilling userBilling
-		assertNotNull(paymentService.createPayment(payment));
+		order.setOrderId(399);
+		payment = paymentService.createPayment(payment);
+		assertNotNull(payment);
 		assertThrows(PaymentException.class, () -> paymentService.getPaymentById(payment.getPaymentId() + 1));
 	}
 
 	@Test
 	public void getPaymentByIdTest() throws PaymentException, OrderException {
-		assertNotNull(paymentService.createPayment(payment));
+		
 		assertNotNull(paymentService.getPaymentById(payment.getPaymentId()));
 		assertThrows(PaymentException.class,()-> paymentService.getPaymentById(200));
 	}
