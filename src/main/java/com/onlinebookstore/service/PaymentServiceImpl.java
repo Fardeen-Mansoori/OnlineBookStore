@@ -10,12 +10,13 @@ import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.Payment;
 import com.onlinebookstore.exception.OrderException;
 import com.onlinebookstore.exception.PaymentException;
+import com.onlinebookstore.exception.UserException;
 /************************************************************************************
  *          @author          Devesh Chitlangia
  *          Description      It is a service class that provides the services for creating a new payment, 
                                         and get payment bt Id.
   *         Version             1.0
-  *         Created Date    16-AUG-2022
+  *         Created Date    18-AUG-2022
  ************************************************************************************/
 
 @Service
@@ -25,6 +26,15 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	OrderService orderService;
+	/************************************************************************************
+	 * Method: - Create Payment
+	 * @Description: - Get Payment User by ID from the
+	 * Book Store Application.
+	 * 
+	 * @object payment - Payment Details
+	 * @returns 
+	 * @throws PaymentException, OrderException - 
+	 ************************************************************************************/
 
 	@Override
 	public Payment createPayment(Payment payment) throws PaymentException, OrderException {
@@ -42,6 +52,14 @@ public class PaymentServiceImpl implements PaymentService {
 		orderService.updateOrder(order);
 		return newPayment;
 	}
+	/************************************************************************************
+	 * Method: - Get Payment By Id
+	 * @Description: - Get Payment by ID from the Book Store Application.
+	 * @parameter paymentId - Payment ID
+	 * @returns - 
+	 * @throws  PaymentException - It is raised due to payment details are invalid, or payment
+	 *                       id is not present.
+	 ************************************************************************************/
 
 	@Override
 	public Payment getPaymentById(Integer paymentId) throws PaymentException {
