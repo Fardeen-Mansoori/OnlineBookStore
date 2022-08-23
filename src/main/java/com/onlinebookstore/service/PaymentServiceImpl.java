@@ -33,7 +33,7 @@ public class PaymentServiceImpl implements PaymentService {
 	 * @returns payment - The saved entity i.e Payment 
 	 * @throws  PaymentException - It is raised due to payment details are invalid, or payment
 	 *                       id is not present.
-	 *@throws  OrderException - It is raised due to Order details are invalid, or order
+	 * @throws  OrderException - It is raised due to Order details are invalid, or order
 	 *                       id is not present.                  
 	 ************************************************************************************/
 
