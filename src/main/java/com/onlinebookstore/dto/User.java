@@ -50,7 +50,7 @@ public class User {
 	// @Temporal(TemporalType.DATE)
 	private LocalDate dateOfBirth;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonIgnore
 
 	private Wishlist wishlist;
@@ -60,7 +60,7 @@ public class User {
 
 	private List<Order> orderList;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonIgnore
 
 	private Cart cart;

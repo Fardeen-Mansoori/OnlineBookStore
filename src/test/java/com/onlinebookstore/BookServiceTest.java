@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 @SpringBootTest
 public class BookServiceTest {
@@ -23,57 +24,57 @@ public class BookServiceTest {
 	@Autowired
 	BookRepository bookRepository;
 	
-	//Book book = new Book(55,"abc","abcd","fardeen",100.0, new Category(100,"abcd","abc"));
 	
-//      Book book = new Book(55,null,null,null,null, null);
-//	
-//	@Test
-//	public void addBookTest() throws BookException{
-//		
-//		assertNotNull(this.bookService.addBook(book));
-//		assertThrows(BookException.class,()->this.bookService.addBook(null));
-//	}
-//	
-//	@Test
-//	public void getBookByIdTest() throws BookException{
-//		
-//		assertNotNull(this.bookService.addBook(book));
-//		assertNotNull(this.bookService.getBookById(book.getBookId()));
-//		assertThrows(BookException.class,()->this.bookService.getBookById(0));
-//		
-//	}
-//	
-//	@Test
-//	public void updateBookTest() throws BookException{
-//		
-//		assertNotNull(this.bookService.addBook(book));
-//		book.setBookName("New Book");
-//		assertEquals("New Book",book.getBookName());
-//		assertThrows(BookException.class,()->this.bookService.updateBook(null));
-//		
-//	}
-//	
-//	
-//	@Test
-//	public void deleteBookByIdTest() throws BookException{
-//		
-//		assertNotNull(this.bookService.addBook(book));
-//		
-//		assertEquals("Successful", this.bookService.deleteBookById(book.getBookId()));
-//		
-//		assertThrows(BookException.class,()-> this.bookService.deleteBookById(0));
-//		
-//		
-//	}
-//	
-//	@Test
-//	public void getAllBooksTest() throws BookException{
-//		
-//		assertNotNull(this.bookService.addBook(book));
-//		assertNotNull(this.bookService.getAllBooks());
-//		//this.bookRepository.deleteAll();
-//		//assertThrows(BookException.class,()->this.bookService.getAllBooks());
-//	}
+	Book book = new Book(55,"abc","abcd","fardeen",100.0);
+	
+     
+	
+	@Test
+	public void addBookTest() throws BookException{
+		
+		assertNotNull(this.bookService.addBook(book));
+		assertThrows(BookException.class,()->this.bookService.addBook(null));
+	}
+	
+	@Test
+	public void getBookByIdTest() throws BookException{
+		
+		assertNotNull(this.bookService.addBook(book));
+		assertNotNull(this.bookService.getBookById(book.getBookId()));
+		assertThrows(BookException.class,()->this.bookService.getBookById(0));
+		
+	}
+	
+	@Test
+	public void updateBookTest() throws BookException{
+		
+		assertNotNull(this.bookService.addBook(book));
+		book.setBookName("New Book");
+		assertEquals("New Book",book.getBookName());
+		assertThrows(BookException.class,()->this.bookService.updateBook(null));
+		
+	}
+	
+	
+	@AfterEach
+	public void deleteBookByIdTest() throws BookException{
+		
+		
+		assertEquals("Successful", this.bookService.deleteBookById(book.getBookId()));
+		
+		assertThrows(BookException.class,()-> this.bookService.deleteBookById(0));
+		
+		
+	}
+	
+	@Test
+	public void getAllBooksTest() throws BookException{
+		
+		assertNotNull(this.bookService.addBook(book));
+		assertNotNull(this.bookService.getAllBooks());
+		
+		
+	}
 	
 	
 

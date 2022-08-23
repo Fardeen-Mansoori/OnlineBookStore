@@ -159,4 +159,10 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		return category.getBook();
 	}
+	@Override
+	public void deleteAll() throws CategoryException {
+		// TODO Auto-generated method stub
+		this.categoryRepository.deleteAll();
+		
+	}
 }

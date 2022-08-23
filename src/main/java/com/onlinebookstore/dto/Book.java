@@ -48,6 +48,19 @@ public class Book {
 		this.bookPrice = bookPrice;
 		this.category = category;
 	}
+	
+
+	public Book(Integer bookId, @NotNull(message = "Name cannot be null") @NotBlank String bookName,
+			@NotNull(message = "BookDescription cannot be null") @NotBlank String bookDescription,
+			@NotNull(message = "AuthorName cannot be null") @NotBlank String bookAuthor,
+			@NotNull(message = "Price cannot be null") @Min(value = 10, message = "Min price can be 10") Double bookPrice) {
+		super();
+		this.bookId = bookId;
+		this.bookName = bookName;
+		this.bookDescription = bookDescription;
+		this.bookAuthor = bookAuthor;
+		this.bookPrice = bookPrice;
+	}
 
 	public Integer getBookId() {
 		return bookId;

@@ -32,6 +32,15 @@ public class Category {
 		this.categoryDescription = categoryDescription;
 		this.book = book;
 	}
+	
+	public Category(Integer categoryId, String categoryName, String categoryDescription) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.categoryDescription = categoryDescription;
+	}
+
+
 	public Integer getCategoryId() {
 		return categoryId;
 	}

@@ -19,4 +19,6 @@ public interface CategoryService {
 	List<Category> getAllCategory() throws CategoryException;
 
 	List<Book> findBycategoryName(String categoryName) throws CategoryException;
+	
+	void deleteAll() throws CategoryException;
 }
