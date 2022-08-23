@@ -11,6 +11,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,6 +35,7 @@ public class Payment {
 	@NotNull(message = "CardNumber can not be null")
 	@NotBlank(message="CardNumber can not be blank")
 	@Size(min=16,max =16,message = "CardNumber must be of 16 digits")
+	@Pattern(regexp ="[0-9]{16}")
 	private String cardNumber;
 	
 	@NotNull(message="Expiry month cannot be null")
@@ -52,9 +54,9 @@ public class Payment {
 	@NotBlank(message="Holder name can not be blank")
 	@Size(min=3,max = 30,message = "Holder name must be of minimum 3 characters and maximum of 30 characters")
 	private String holderName;
-	//private String paymentStatus;
+	
 	@OneToOne
-	@JsonIgnore
+	
 	private Order order;
 	
 	

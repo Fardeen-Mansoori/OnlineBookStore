@@ -32,12 +32,14 @@ public class OrderServiceImpl implements OrderService {
 	CartService cartService;
 
 	@Override
-	public Order placeOrder(User user, Cart cart, String shippingAddress, Payment payment) throws OrderException, CartException {
+	public Order placeOrder(User user, Cart cart, String shippingAddress) throws OrderException, CartException {
+		if(cart.getCartItemList().isEmpty()) {
+			throw new OrderException("Order cannot be placed, cart is empty");
+		}
 
 		Order order = new Order();
 
 		order.setOrderStatus("created");
-		order.setPayment(payment);
 		order.setShippingAddress(shippingAddress);
 
 		List<CartItem> cartItemList = cartItemService.findByCart(cart);
@@ -53,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
 		order.setDeliveryDate(order.getOrderDate().plusDays(7));
 		order.setOrderTotal(cart.getCartTotal());
 
-		payment.setOrder(order);
+		
 		order.setUser(user);
 		order = orderRepository.save(order);
 		cartService.clearCart(cart);

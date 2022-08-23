@@ -42,14 +42,13 @@ public class OrderController {
 	@Autowired
 	PaymentService paymentService;
 
-	@PostMapping("order/{userId}/{shippingAddress}/{paymentId}")
-	public Order placeOrder(@Valid @PathVariable Integer userId, @PathVariable String shippingAddress,
-			@PathVariable Integer paymentId) throws OrderException, UserException, PaymentException, CartException {
+	@PostMapping("order/{userId}/{shippingAddress}")
+	public Order placeOrder(@Valid @PathVariable Integer userId, @PathVariable String shippingAddress) throws OrderException, UserException, CartException {
 		User user = userService.getUserById(userId);
 		Cart cart = user.getCart();
-		Payment payment = paymentService.getPaymentById(paymentId);
+		
 
-		return orderService.placeOrder(user, cart, shippingAddress, payment);
+		return orderService.placeOrder(user, cart, shippingAddress);
 	}
 
 	@GetMapping("order/{orderId}")

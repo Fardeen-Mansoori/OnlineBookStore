@@ -11,7 +11,7 @@ import com.onlinebookstore.exception.OrderException;
 
 public interface OrderService {
 
-	Order placeOrder(User user, Cart cart, String shippingAddress, Payment payment)
+	Order placeOrder(User user, Cart cart, String shippingAddress)
 			throws OrderException, CartException;
 
 	Order getOrderById(Integer orderId) throws OrderException;
