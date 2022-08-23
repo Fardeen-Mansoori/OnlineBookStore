@@ -35,7 +35,7 @@ public class AdminController {
 
 	@GetMapping("admins")
 	public List<Admin> getsAdmin() throws AdminException {
-		return this.adminService.getAdmins();
+		return this.adminService.getAdmin();
 
 	}
 

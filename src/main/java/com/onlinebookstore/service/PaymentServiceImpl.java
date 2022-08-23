@@ -28,12 +28,13 @@ public class PaymentServiceImpl implements PaymentService {
 	OrderService orderService;
 	/************************************************************************************
 	 * Method: - Create Payment
-	 * @Description: - Get Payment User by ID from the
-	 * Book Store Application.
-	 * 
+	 * @Description: - It Does Payment for an order
 	 * @object payment - Payment Details
-	 * @returns 
-	 * @throws PaymentException, OrderException - 
+	 * @returns payment - The saved entity i.e Payment 
+	 * @throws  PaymentException - It is raised due to payment details are invalid, or payment
+	 *                       id is not present.
+	 *@throws  OrderException - It is raised due to Order details are invalid, or order
+	 *                       id is not present.                  
 	 ************************************************************************************/
 
 	@Override
@@ -55,10 +56,11 @@ public class PaymentServiceImpl implements PaymentService {
 	/************************************************************************************
 	 * Method: - Get Payment By Id
 	 * @Description: - Get Payment by ID from the Book Store Application.
-	 * @parameter paymentId - Payment ID
-	 * @returns - 
+	 * @parameter paymentId - Unique Payment ID
+	 * @returns payment - The saved entity i.e Payment 
 	 * @throws  PaymentException - It is raised due to payment details are invalid, or payment
 	 *                       id is not present.
+	 *                       
 	 ************************************************************************************/
 
 	@Override

@@ -31,11 +31,11 @@ public class CartServiceImpl implements CartService {
 	CartItemService cartItemService;
 	
 	/************************************************************************************
-	 * Method: - Get all Cart Item
-	 * @Description: - Get all cart items from the Book Store Application. 
-	 * @returns List<Cart> - List of all cart items if exists otherwise throws Cart
+	 * Method: - Get all Carts 
+	 * @Description: - Get all carts  from the Book Store Application. 
+	 * @returns List<Cart> - List of all carts if exists otherwise throws Cart
 	 *          Exception
-	 * @throws CartException if the cart items are null.
+	 * @throws CartException - if the cart  is null.
 	 ************************************************************************************/
 
 
@@ -44,10 +44,10 @@ public class CartServiceImpl implements CartService {
 		return this.cartRepository.findAll();
 	}
 	/************************************************************************************
-	 * Method: - Update Cart Item
-	 * @Description: - Update Cart Item in the Book Store Application.
+	 * Method: - Update Cart 
+	 * @Description: - Update Cart  in the Book Store Application.
 	 * @object cart - cart details
-	 * @return updated entity i.e. cart if Items exists otherwise throws User
+	 * @return cart - updated entity i.e. cart if Items exists otherwise throws User
 	 *          Exception
 	 * @throws CartException - It is raised due to Cart details are invalid, or Cart
 	 *                       id is not present.
@@ -77,11 +77,11 @@ public class CartServiceImpl implements CartService {
 
 	}
 	/************************************************************************************
-	 * Method: - Clear Cart Items
-	 * @Description: - Clear all cart Items in the Book Store Application.
+	 * Method: - Clear Cart 
+	 * @Description: - Clear all cart  in the Book Store Application.
 	 * @object cart - cart details
-	 * @returns
-	 * @throws CartException -
+	 * @throws CartException -It is raised due to Cart details are invalid, or Cart
+	 *                       id is not present.
 	 ************************************************************************************/
 
 	@Override

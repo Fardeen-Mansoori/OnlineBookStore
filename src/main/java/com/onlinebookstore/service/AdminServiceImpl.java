@@ -109,7 +109,7 @@ public class AdminServiceImpl implements AdminService {
 	 *                       id is not present.
 	 ************************************************************************************/
 	@Override
-	public List<Admin> getAdmins() throws AdminException {
+	public List<Admin> getAdmin() throws AdminException {
 
 		return this.adminRepository.findAll();
 	}
