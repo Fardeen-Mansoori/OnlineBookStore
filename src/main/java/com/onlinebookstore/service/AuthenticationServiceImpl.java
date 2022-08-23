@@ -8,10 +8,10 @@ import com.onlinebookstore.dto.Authentication;
 import com.onlinebookstore.exception.AdminException;
 import com.onlinebookstore.exception.UserException;
 /************************************************************************************
- * @author Devesh Chitlangia
- * @Description It is a service class that provides the services for creating a
- *              new user, get user by ID, Update User and Get All Users. Version
- *              1.0 Created Date 16-AUG-2022
+ * @author Faisal Khan
+ * @Description It is a service class that provides the services for login 
+ *     
+ *              Version 1.0 Created Date 20-AUG-2022
  ************************************************************************************/
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -21,13 +21,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Autowired
 	UserService userService;
 	/************************************************************************************
-	 * Method: - Add User Description: - Registered User in the Book Store
-	 * Application.
-	 * 
-	 * @object User - User detail
-	 * @returns the saved entity, if user registered otherwise throws UserException
-	 *          Exception
-	 * @throws UserException - It is raised due to User details are invalid or null     
+	 * Method: - Admin Login 
+	 * Description: - Login of Admin in Book Store Application.
+	 * @object Authenticatin - Admin Details
+	 * @returns Boolean - True if Admin get Login.
+	 * @throws AdminException - It is raised due to Admin details are invalid or null     
 	 ************************************************************************************/
 	
 	@Override
@@ -38,12 +36,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		return true;
 	}
 	/************************************************************************************
-	 * Method: - Add User Description: - Registered User in the Book Store
-	 * Application.
-	 * 
-	 * @object User - User detail
-	 * @returns the saved entity, if user registered otherwise throws UserException
-	 *          Exception
+	 * Method: - User Login
+	 * Description: - Login of User in Book Store Application. 
+	 * @object Authenticatin - User Details
+	 * @returns Boolean - True if User get Login.
 	 * @throws UserException - It is raised due to User details are invalid or null     
 	 ************************************************************************************/
 
