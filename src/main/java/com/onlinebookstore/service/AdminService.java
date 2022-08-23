@@ -11,4 +11,5 @@ public interface AdminService {
 	String updateAdmin(Admin admin) throws AdminException;
 	String deleteAdmin(Integer adminId,String adminPassword) throws AdminException;
 	Boolean login(Integer adminId,String adminPassword) throws AdminException;
+	String changePassword(Integer id,String oldPassword, String newPassword) throws AdminException;
 	}

@@ -56,4 +56,9 @@ public class AdminController {
 		return this.adminService.login(adminId, adminPassword);
 
 	}
+	@PutMapping("admin/updatepassword/{id}/{oldPassword}/{newPassword}")
+	public String changePassword(@PathVariable Integer id,@PathVariable String oldPassword,@PathVariable  String newPassword) throws AdminException {
+		return this.adminService.changePassword(id,oldPassword, newPassword);
+		
+	}
 }

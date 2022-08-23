@@ -147,5 +147,20 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return isLogedin;
 	}
+	@Override
+	public String changePassword(Integer id,String oldPassword, String newPassword) throws AdminException {
+		String isPasswordUpdated;
+		Optional<Admin> foundAdmin=this.adminRepository.findById(id) ;
+		if (foundAdmin.isEmpty())
+			throw new AdminException("Admin doesn't exist");
+		
+		if (!foundAdmin.get().getAdminPassword().equals(oldPassword)) {
+			throw new AdminException("Password doesn't match");
+		}
+		foundAdmin.get().setAdminPassword(newPassword);
+		this.adminRepository.save(foundAdmin.get());
+		isPasswordUpdated = "Password Updated Successfully";
+		return isPasswordUpdated;
+	}
 
 }
