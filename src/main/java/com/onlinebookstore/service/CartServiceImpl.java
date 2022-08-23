@@ -2,6 +2,7 @@ package com.onlinebookstore.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,14 @@ import com.onlinebookstore.dao.CartRepository;
 import com.onlinebookstore.dto.Cart;
 import com.onlinebookstore.dto.CartItem;
 import com.onlinebookstore.exception.CartException;
+import com.onlinebookstore.exception.UserException;
+/************************************************************************************
+ *          @author          Fardeen Mansoori
+ *          Description      It is a service class that provides the services for get Cart Details and 
+ *                           operations on Carts item.       
+ *         Version             1.0
+ *         Created Date     20-AUG-2022
+ ************************************************************************************/
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -20,12 +29,29 @@ public class CartServiceImpl implements CartService {
 
 	@Autowired
 	CartItemService cartItemService;
+	
+	/************************************************************************************
+	 * Method: - Get all Cart Item
+	 * @Description: - Get all cart items from the Book Store Application. 
+	 * @returns List<Cart> - List of all cart items if exists otherwise throws Cart
+	 *          Exception
+	 * @throws CartException if the cart items are null.
+	 ************************************************************************************/
 
 
 	@Override
 	public List<Cart> getAllCart() throws CartException {
 		return this.cartRepository.findAll();
 	}
+	/************************************************************************************
+	 * Method: - Update Cart Item
+	 * @Description: - Update Cart Item in the Book Store Application.
+	 * @object cart - cart details
+	 * @return updated entity i.e. cart if Items exists otherwise throws User
+	 *          Exception
+	 * @throws CartException - It is raised due to Cart details are invalid, or Cart
+	 *                       id is not present.
+	 ************************************************************************************/
 
 	@Override
 	public Cart updateCart(Cart cart) throws CartException {
@@ -50,6 +76,13 @@ public class CartServiceImpl implements CartService {
 		return cart;
 
 	}
+	/************************************************************************************
+	 * Method: - Clear Cart Items
+	 * @Description: - Clear all cart Items in the Book Store Application.
+	 * @object cart - cart details
+	 * @returns
+	 * @throws CartException -
+	 ************************************************************************************/
 
 	@Override
 	public void clearCart(Cart cart) throws CartException {
