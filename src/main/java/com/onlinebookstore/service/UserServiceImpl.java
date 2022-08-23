@@ -16,9 +16,10 @@ import com.onlinebookstore.dto.Wishlist;
 import com.onlinebookstore.exception.UserException;
 
 /************************************************************************************
- * @author Devesh Chitlangia @Description It is a service class that provides
- *         the services for creating a new user, get user by ID, Update User and
- *         Get All Users. Version 1.0 Created Date 16-AUG-2022
+ * @author Devesh Chitlangia
+ * @Description It is a service class that provides the services for creating a
+ *              new user, get user by ID, Update User and Get All Users. Version
+ *              1.0 Created Date 16-AUG-2022
  ************************************************************************************/
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,14 +31,13 @@ public class UserServiceImpl implements UserService {
 	WishlistRepository wishlistRepository;
 
 	/************************************************************************************
-	 * Method: - Add User 
-	 * Description: - Registered User in the Book Store Application.
+	 * Method: - Add User Description: - Registered User in the Book Store
+	 * Application.
 	 * 
 	 * @object User - User detail
-	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 * @returns the saved entity, if user registered otherwise throws UserException
 	 *          Exception
-	 * @throws UserException - It is raised due to User details are invalid, or User
-	 *                       id is not present.
+	 * @throws UserException - It is raised due to User details are invalid or null     
 	 ************************************************************************************/
 
 	@Override
@@ -59,16 +59,17 @@ public class UserServiceImpl implements UserService {
 
 		return this.userRepository.save(user);
 	}
+
 	/************************************************************************************
-	 * Method: - Get User By ID
-	 * Description: - Get Registered User by ID from the Book Store
-	 * Application.
+	 * Method: - Get User By ID 
+	 * @Description: - Get Registered User by ID from the
+	 * Book Store Application.
 	 * 
-	 * @object userId - User ID
-	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 * @parameter userId - User ID
+	 * @returns the saved entity i.e. User if User exists otherwise throws User
 	 *          Exception
 	 * @throws UserException - It is raised due to User details are invalid, or User
-	 *                         id is not present.
+	 *                       id is not present.
 	 ************************************************************************************/
 
 	@Override
@@ -80,12 +81,14 @@ public class UserServiceImpl implements UserService {
 		}
 		return foundUser.get();
 	}
+
 	/************************************************************************************
-	 * Method: - Add User Description: - Registered User in the Book Store
+	 * Method: - Update User 
+	 * @Description: - Update the Registered User in the Book Store
 	 * Application.
 	 * 
 	 * @object User - User detail
-	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 * @returns  the updated entity i.e. User if User exists otherwise throws User
 	 *          Exception
 	 * @throws UserException - It is raised due to User details are invalid, or User
 	 *                       id is not present.
@@ -105,12 +108,14 @@ public class UserServiceImpl implements UserService {
 		return this.userRepository.save(user);
 
 	}
+
 	/************************************************************************************
-	 * Method: - Add User Description: - Registered User in the Book Store
+	 * Method: - Delete User by Id
+	 * @Description: - Delete the exists User in the Book Store
 	 * Application.
 	 * 
-	 * @object User - User detail
-	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 * @parameter UserId - User ID
+	 * @returns String - Successful, if user deleted successfully otherwise throws User
 	 *          Exception
 	 * @throws UserException - It is raised due to User details are invalid, or User
 	 *                       id is not present.
@@ -131,15 +136,14 @@ public class UserServiceImpl implements UserService {
 		}
 		return isDeleted;
 	}
+
 	/************************************************************************************
-	 * Method: - Add User Description: - Registered User in the Book Store
+	 * Method: - get All registered users
+	 * @Description: - retrieve all registered User in the Book Store
 	 * Application.
-	 * 
-	 * @object User - User detail
-	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 * @returns List<User> - List of registered users if exists otherwise throws User
 	 *          Exception
-	 * @throws UserException - It is raised due to User details are invalid, or User
-	 *                       id is not present.
+	 * @throws UserException - It is raised when there is no users found.
 	 ************************************************************************************/
 
 	@Override
@@ -151,14 +155,16 @@ public class UserServiceImpl implements UserService {
 		}
 		return userList;
 	}
+
 	/************************************************************************************
-	 * Method: - Add User Description: - Registered User in the Book Store
+	 * Method: - Login
+	 * @Description: - Registered User in the Book Store
 	 * Application.
 	 * 
-	 * @object User - User detail
-	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 * @parameter userId, userPassword - User ID and User Password
+	 * @returns Boolean - true, if customer registered otherwise throws User
 	 *          Exception
-	 * @throws UserException - It is raised due to User details are invalid, or User
+	 * @throws UserException - It is raised due to User password are invalid, or User
 	 *                       id is not present.
 	 ************************************************************************************/
 
