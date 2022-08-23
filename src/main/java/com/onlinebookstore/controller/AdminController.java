@@ -26,7 +26,7 @@ public class AdminController {
 	AdminService adminService;
 
 	@PostMapping("admin")
-	public Admin registerUser(@Valid @RequestBody Admin admin) throws AdminException, MethodArgumentNotValidException {
+	public String registerUser(@Valid @RequestBody Admin admin) throws AdminException, MethodArgumentNotValidException {
 
 		return this.adminService.registerAdmin(admin);
 
@@ -34,13 +34,13 @@ public class AdminController {
 
 
 	@GetMapping("admins")
-	public List<Admin> getAdmin() throws AdminException {
+	public List<Admin> getsAdmin() throws AdminException {
 		return this.adminService.getAdmin();
 
 	}
 
 	@PutMapping("admin")
-	public Admin updateAdmin(@Valid @RequestBody Admin admin) throws AdminException, MethodArgumentNotValidException {
+	public String updateAdmin(@Valid @RequestBody Admin admin) throws AdminException, MethodArgumentNotValidException {
 		return this.adminService.updateAdmin(admin);
 
 	}

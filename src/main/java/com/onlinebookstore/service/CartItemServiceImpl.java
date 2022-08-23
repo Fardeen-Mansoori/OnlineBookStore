@@ -1,7 +1,8 @@
 package com.onlinebookstore.service;
 
 import java.util.List;
-import java.util.Optional;
+
+
 
 import javax.transaction.Transactional;
 
@@ -16,7 +17,7 @@ import com.onlinebookstore.dto.Cart;
 import com.onlinebookstore.dto.CartItem;
 import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.User;
-import com.onlinebookstore.exception.CartException;
+
 
 @Service
 public class CartItemServiceImpl implements CartItemService {

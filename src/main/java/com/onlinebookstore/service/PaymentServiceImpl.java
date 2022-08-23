@@ -10,12 +10,13 @@ import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.Payment;
 import com.onlinebookstore.exception.OrderException;
 import com.onlinebookstore.exception.PaymentException;
+
 /************************************************************************************
  *          @author          Devesh Chitlangia
  *          Description      It is a service class that provides the services for creating a new payment, 
                                         and get payment bt Id.
   *         Version             1.0
-  *         Created Date    16-AUG-2022
+  *         Created Date    18-AUG-2022
  ************************************************************************************/
 
 @Service
@@ -25,6 +26,16 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	OrderService orderService;
+	/************************************************************************************
+	 * Method: - Create Payment
+	 * @Description: - It Does Payment for an order
+	 * @object payment - Payment Details
+	 * @returns payment - The saved entity i.e Payment 
+	 * @throws  PaymentException - It is raised due to payment details are invalid, or payment
+	 *                       id is not present.
+	 * @throws  OrderException - It is raised due to Order details are invalid, or order
+	 *                       id is not present.                  
+	 ************************************************************************************/
 
 	@Override
 	public Payment createPayment(Payment payment) throws PaymentException, OrderException {
@@ -42,6 +53,15 @@ public class PaymentServiceImpl implements PaymentService {
 		orderService.updateOrder(order);
 		return newPayment;
 	}
+	/************************************************************************************
+	 * Method: - Get Payment By Id
+	 * @Description: - Get Payment by ID from the Book Store Application.
+	 * @parameter paymentId - Unique Payment ID
+	 * @returns payment - The saved entity i.e Payment 
+	 * @throws  PaymentException - It is raised due to payment details are invalid, or payment
+	 *                       id is not present.
+	 *                       
+	 ************************************************************************************/
 
 	@Override
 	public Payment getPaymentById(Integer paymentId) throws PaymentException {

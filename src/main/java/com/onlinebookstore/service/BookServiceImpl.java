@@ -13,12 +13,27 @@ import com.onlinebookstore.dao.BookRepository;
 import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.exception.BookException;
 
+
+/************************************************************************************
+ * @author Kewal Shah
+ * @Description It is a service class that provides the services for adding a
+ *              new book, get book by ID, Update book, Get all books and get all
+ *              book by name.
+ * Version 1.0 
+ * Created Date 10-AUG-2022
+ ************************************************************************************/
 @Service
 //Repository
 public class BookServiceImpl implements BookService {
 	@Autowired
 	BookRepository bookRepository;
 
+	/************************************************************************************
+	 * Method: - addBook() Description: - Adding book in the Book Store Application.
+	 * @object Book - Book details
+	 * @returns the saved entity, if book added otherwise throws BookException
+	 * @throws BookException - It is raised due to book details are invalid or null
+	 ************************************************************************************/
 //@Transactional
 	@Override
 	public Book addBook(Book book) throws BookException {
@@ -32,6 +47,15 @@ public class BookServiceImpl implements BookService {
 
 	}
 
+	/************************************************************************************
+	 * Method: - getBookByID()
+	 * @Description: - Get Book by ID from the Book Store Application.
+	 * @parameter bookId - Book ID
+	 * @returns the saved entity i.e. book if book exists otherwise throws
+	 *          BookException
+	 * @throws BookException - It is raised due to book details are invalid, or book
+	 *                       id is not present.
+	 ************************************************************************************/
 	@Transactional
 	@Override
 	public Book getBookById(Integer bookId) throws BookException {
@@ -43,10 +67,20 @@ public class BookServiceImpl implements BookService {
 		return optBook.get();
 	}
 
+	/************************************************************************************
+	 * Method: - updateBook()
+	 * @Description: - Update the book in the Book Store Application.
+	 * @object Book - Book detail
+	 * @returns the updated entity i.e. Book if Book exists otherwise throws
+	 *          BookException
+	 * @throws BookException - It is raised due to Book details are invalid, or Book
+	 *                       id is not present.
+	 ************************************************************************************/
+
 	@Override
 	@Transactional
 	public Book updateBook(Book book) throws BookException {
-		if(book==null) {
+		if (book == null) {
 			throw new BookException("Book cannot be null");
 		}
 		Optional<Book> foundBook = this.bookRepository.findById(book.getBookId());
@@ -57,6 +91,15 @@ public class BookServiceImpl implements BookService {
 		return this.bookRepository.save(book);
 	}
 
+	/************************************************************************************
+	 * Method: - deleteBookById()
+	 * @Description: - Delete the exists Book in the Book Store Application.
+	 * @parameter bookId
+	 * @returns String - Successful, if book deleted successfully otherwise throws
+	 *          BookException
+	 * @throws BookException - It is raised due to Book details are invalid, or book
+	 *                       id is not present.
+	 ************************************************************************************/
 	@Override
 	@Transactional
 	public String deleteBookById(Integer bookId) throws BookException {
@@ -73,25 +116,36 @@ public class BookServiceImpl implements BookService {
 
 	}
 
+	/************************************************************************************
+	 * Method: - getAllBooks()
+	 * 
+	 * @Description: - retrieve all the books in the Book Store Application.
+	 * @returns List<Book> - List of books if exists otherwise throws BookException
+	 * @throws BookException - It is raised when there is no book found.
+	 ************************************************************************************/
 	@Override
 	public List<Book> getAllBooks() throws BookException {
-        List<Book> bookList = this.bookRepository.findAll();
-        if(bookList.isEmpty()) {
-        	throw new BookException("No books found");
-        }
-		return bookList;
-	}
-
-	
-
-	@Override
-	public List<Book> findByBookName(String bookName) throws BookException {
-		List<Book> bookList = bookRepository.findByBookName(bookName);
-		if(bookList.isEmpty()) {
+		List<Book> bookList = this.bookRepository.findAll();
+		if (bookList.isEmpty()) {
 			throw new BookException("No books found");
 		}
 		return bookList;
 	}
 
-	
+	/************************************************************************************
+	 * Method: - findByBookName()
+	 * @Description: - retrieve the books by name in the Book Store Application.
+	 * @returns List<Book> - List of books if exists otherwise throws BookException
+	 * @throws BookException - It is raised when there is no book found.
+	 ************************************************************************************/
+
+	@Override
+	public List<Book> findByBookName(String bookName) throws BookException {
+		List<Book> bookList = bookRepository.findByBookName(bookName);
+		if (bookList.isEmpty()) {
+			throw new BookException("No books found");
+		}
+		return bookList;
+	}
+
 }

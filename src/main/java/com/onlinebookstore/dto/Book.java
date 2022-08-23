@@ -1,16 +1,14 @@
 package com.onlinebookstore.dto;
 
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -30,12 +28,12 @@ public class Book {
 	//@NotBlank()
 	@Min(value=10, message="Min price can be 10")
 	private Double bookPrice;
-	@ManyToOne
-	private Category category;
+
 	
-	@OneToMany(mappedBy = "book")
-	@JsonIgnore
-	private List<BookToCartItem> bookToCartItemList;
+	@ManyToOne
+	//@JoinColumn(name="category_id")
+	//@JsonIgnore
+	private Category category;
 	
 	
 	public Book() {
@@ -43,22 +41,8 @@ public class Book {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
-	public List<BookToCartItem> getBookToCartItemList() {
-		return bookToCartItemList;
-	}
-
-
-
-	public void setBookToCartItemList(List<BookToCartItem> bookToCartItemList) {
-		this.bookToCartItemList = bookToCartItemList;
-	}
-
-
-
 	public Book(Integer bookId, String bookName, String bookDescription, String bookAuthor, Double bookPrice,
-			Category category, List<BookToCartItem> bookToCartItemList) {
+			Category category) {
 		super();
 		this.bookId = bookId;
 		this.bookName = bookName;
@@ -66,7 +50,6 @@ public class Book {
 		this.bookAuthor = bookAuthor;
 		this.bookPrice = bookPrice;
 		this.category = category;
-		this.bookToCartItemList = bookToCartItemList;
 	}
 
 	public Integer getBookId() {
@@ -108,11 +91,11 @@ public class Book {
 	public void setBookPrice(Double bookPrice) {
 		this.bookPrice = bookPrice;
 	}
-
+	
 	public Category getCategory() {
 		return category;
 	}
-
+	
 	public void setCategory(Category category) {
 		this.category = category;
 	}
