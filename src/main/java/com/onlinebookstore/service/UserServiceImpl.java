@@ -14,12 +14,11 @@ import com.onlinebookstore.dto.Cart;
 import com.onlinebookstore.dto.User;
 import com.onlinebookstore.dto.Wishlist;
 import com.onlinebookstore.exception.UserException;
+
 /************************************************************************************
- *          @author          Devesh Chitlangia
- *          Description      It is a service class that provides the services for creating a new user, 
-                                        get user by ID, Update User and Get All Users.
-  *         Version             1.0
-  *         Created Date    16-AUG-2022
+ * @author Devesh Chitlangia @Description It is a service class that provides
+ *         the services for creating a new user, get user by ID, Update User and
+ *         Get All Users. Version 1.0 Created Date 16-AUG-2022
  ************************************************************************************/
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,6 +28,17 @@ public class UserServiceImpl implements UserService {
 	CartRepository cartRepository;
 	@Autowired
 	WishlistRepository wishlistRepository;
+
+	/************************************************************************************
+	 * Method: - Add User 
+	 * Description: - Registered User in the Book Store Application.
+	 * 
+	 * @object User - User detail
+	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 *          Exception
+	 * @throws UserException - It is raised due to User details are invalid, or User
+	 *                       id is not present.
+	 ************************************************************************************/
 
 	@Override
 	public User registerUser(User user) throws UserException {
@@ -49,6 +59,17 @@ public class UserServiceImpl implements UserService {
 
 		return this.userRepository.save(user);
 	}
+	/************************************************************************************
+	 * Method: - Get User By ID
+	 * Description: - Get Registered User by ID from the Book Store
+	 * Application.
+	 * 
+	 * @object userId - User ID
+	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 *          Exception
+	 * @throws UserException - It is raised due to User details are invalid, or User
+	 *                         id is not present.
+	 ************************************************************************************/
 
 	@Override
 	public User getUserById(Integer userId) throws UserException {
@@ -59,6 +80,16 @@ public class UserServiceImpl implements UserService {
 		}
 		return foundUser.get();
 	}
+	/************************************************************************************
+	 * Method: - Add User Description: - Registered User in the Book Store
+	 * Application.
+	 * 
+	 * @object User - User detail
+	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 *          Exception
+	 * @throws UserException - It is raised due to User details are invalid, or User
+	 *                       id is not present.
+	 ************************************************************************************/
 
 	@Override
 	public User updateUser(User user) throws UserException {
@@ -74,6 +105,16 @@ public class UserServiceImpl implements UserService {
 		return this.userRepository.save(user);
 
 	}
+	/************************************************************************************
+	 * Method: - Add User Description: - Registered User in the Book Store
+	 * Application.
+	 * 
+	 * @object User - User detail
+	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 *          Exception
+	 * @throws UserException - It is raised due to User details are invalid, or User
+	 *                       id is not present.
+	 ************************************************************************************/
 
 	@Override
 	public String deleteUserById(Integer userId) throws UserException {
@@ -90,6 +131,16 @@ public class UserServiceImpl implements UserService {
 		}
 		return isDeleted;
 	}
+	/************************************************************************************
+	 * Method: - Add User Description: - Registered User in the Book Store
+	 * Application.
+	 * 
+	 * @object User - User detail
+	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 *          Exception
+	 * @throws UserException - It is raised due to User details are invalid, or User
+	 *                       id is not present.
+	 ************************************************************************************/
 
 	@Override
 	public List<User> getAllUser() throws UserException {
@@ -100,6 +151,16 @@ public class UserServiceImpl implements UserService {
 		}
 		return userList;
 	}
+	/************************************************************************************
+	 * Method: - Add User Description: - Registered User in the Book Store
+	 * Application.
+	 * 
+	 * @object User - User detail
+	 * @returns Boolean - true, if customer registered otherwise throws Customer
+	 *          Exception
+	 * @throws UserException - It is raised due to User details are invalid, or User
+	 *                       id is not present.
+	 ************************************************************************************/
 
 	@Override
 	public Boolean login(Integer userId, String userPassword) throws UserException {
