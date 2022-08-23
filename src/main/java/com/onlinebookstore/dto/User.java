@@ -68,7 +68,7 @@ public class User {
 	}
 	
 	public User(Integer userId, String userName, String userPassword, String userEmail, String userAddress,
-			String userContact, Date dateOfBirth) {
+			String userContact, LocalDate dateOfBirth) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -80,13 +80,9 @@ public class User {
 		
 	}
 
-<<<<<<< HEAD
-	public User(Integer userId, String userName, String userPassword, String userEmail, String userAddress,
-			String userContact, Date dateOfBirth, Wishlist wishlist, List<Order> orderList, Cart cart) {
-=======
+
 	public User(Integer userId, String userPassword, String userName, String userEmail, String userAddress,
 			String userContact, LocalDate dateOfBirth, Wishlist wishlist, List<Order> orderList, Cart cart) {
->>>>>>> a3ad14f919b6ebbdff42719db0a62b6132ca6078
 		super();
 		this.userId = userId;
 		this.userName = userName;
