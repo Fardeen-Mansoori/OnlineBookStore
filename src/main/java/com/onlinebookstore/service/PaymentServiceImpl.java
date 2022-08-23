@@ -1,5 +1,6 @@
 package com.onlinebookstore.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +74,19 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 
 		return foundPayment.get();
+	}
+	/************************************************************************************
+	 * Method: - getAllPayments
+	 * @Description: - Get All Payments from the Book Store Application.
+	 * @returns List<Payment> - Return List of Payments present. 
+	 * @throws  PaymentException - It is raised due to payment details are invalid, or payment
+	 *                       id is not present.
+	 *                       
+	 ************************************************************************************/
+	
+	@Override
+	public List<Payment> getAllPayments() throws PaymentException {
+		List<Payment> paymentList = paymentRepository.findAll();
+		return paymentList;
 	}
 }
