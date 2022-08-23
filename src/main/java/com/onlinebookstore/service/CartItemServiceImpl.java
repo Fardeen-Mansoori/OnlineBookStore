@@ -15,8 +15,15 @@ import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.dto.BookToCartItem;
 import com.onlinebookstore.dto.Cart;
 import com.onlinebookstore.dto.CartItem;
-import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.User;
+import com.onlinebookstore.exception.CartException;
+/************************************************************************************
+ *          @author          Fardeen Mansoori
+ *          Description      It is a service class that provides the services for get Cart Details and 
+ *                           operations on Carts item.       
+ *         Version             1.0
+ *         Created Date     20-AUG-2022
+ ************************************************************************************/
 
 
 @Service
@@ -28,11 +35,27 @@ public class CartItemServiceImpl implements CartItemService {
 	@Autowired
 	private BookToCartItemRepository bookToCartItemRepository;
 	
+	/************************************************************************************
+	 * Method: - Get all Carts items 
+	 * @Description: - Get all carts items  from the Book Store Application. 
+	 * @returns List<Cart> - List of all carts items if exists otherwise throws Cart
+	 *          Exception
+	 * @throws CartException - if the cart item  is null.
+	 ************************************************************************************/
+	
 	@Override
 	public List<CartItem> findByCart(Cart cart) {
 		// TODO Auto-generated method stub
 		return this.cartItemRepository.findByCart(cart);
 	}
+	/************************************************************************************
+	 * Method: - Update Cart 
+	 * @Description: - Update Cart item in the Book Store Application.
+	 * @object cartItem - cart item details
+	 * @return cartItem - updated entity i.e. cartItem if cartItems exists otherwise throws CartException
+	 * @throws CartException - It is raised due to Cart details are invalid, or Cart
+	 *                       id is not present.
+	 ************************************************************************************/
 
 	@Override
 	public CartItem updateCartItem(CartItem cartItem) {
@@ -42,7 +65,17 @@ public class CartItemServiceImpl implements CartItemService {
 
 		return cartItem;
 	}
-
+	/************************************************************************************
+	 * Method: - addBookToCartItem
+	 * @Description: - Add a particular book to cartItem
+	 * @object Book - Book details
+	 * @object User - User details
+	 * @parameter  qty - Quantity of Book to add in cartItem
+	 * @return cartItem - updated entity i.e. cartItem if cartItems exists otherwise throws CartException
+	 * @throws CartException - It is raised due to Cart details are invalid, or Cart
+	 *                       id is not present.
+	 ************************************************************************************/
+	
 	@Override
 	public CartItem addBookToCartItem(Book book, User user, int qty)  {
 		// TODO Auto-generated method stub
@@ -82,6 +115,14 @@ public class CartItemServiceImpl implements CartItemService {
 
 	@Override
 	@Transactional
+	
+	/************************************************************************************
+	 * Method: - Remove  CartItem
+	 * @Description: - Remove cartItem  present in cart.
+	 * @object cartItem - cartItem details
+	 * @throws CartException -It is raised due to Cart details are invalid, or Cart
+	 *                       id is not present.
+	 ************************************************************************************/
 	public void removeCartItem(CartItem cartItem) {
 		// TODO Auto-generated method stub
 		bookToCartItemRepository.deleteByCartItem(cartItem);
@@ -94,12 +135,6 @@ public class CartItemServiceImpl implements CartItemService {
 		// TODO Auto-generated method stub
 		return cartItemRepository.save(cartItem);
 	}
-
-	@Override
-	public List<CartItem> findByOrder(Order order) {
-		// TODO Auto-generated method stub
-		return cartItemRepository.findByOrder(order);
-
-	}
+		
 
 }

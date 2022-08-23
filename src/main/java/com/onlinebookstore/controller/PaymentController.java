@@ -1,5 +1,7 @@
 package com.onlinebookstore.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 
@@ -36,6 +38,11 @@ public class PaymentController {
 	public Payment getPaymentById(@PathVariable Integer paymentId) throws PaymentException {
 		return this.paymentService.getPaymentById(paymentId);
 
+	}
+	
+	@GetMapping("payments")
+	public List<Payment> getAllPayments() throws PaymentException {
+		return this.paymentService.getAllPayments();
 	}
 
 }

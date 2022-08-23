@@ -6,7 +6,6 @@ import java.util.List;
 import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.dto.Cart;
 import com.onlinebookstore.dto.CartItem;
-import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.User;
 
 
@@ -26,6 +25,5 @@ public interface CartItemService {
 
 	    CartItem save(CartItem cartItem);
 
-	    List<CartItem> findByOrder(Order order);
 
 }
