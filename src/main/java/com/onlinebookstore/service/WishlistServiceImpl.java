@@ -11,10 +11,9 @@ import com.onlinebookstore.dto.Wishlist;
 import com.onlinebookstore.exception.WishlistException;
 
 /************************************************************************************
- * @author Kewal Shah
- *  Description It is a service implementation class that provides the services for getting wishlist ,updating wishlist and getting all wishlists. 
- *  Version 1.0
- *  Created Date 10/08/2022
+ * @author Kewal Shah Description It is a service implementation class that
+ *         provides the services for getting wishlist ,updating wishlist and
+ *         getting all wishlists. Version 1.0 Created Date 10/08/2022
  ************************************************************************************/
 @Service
 public class WishlistServiceImpl implements WishlistService {
@@ -25,23 +24,6 @@ public class WishlistServiceImpl implements WishlistService {
 	@Autowired
 	BookRepository bookRepository;
 
-//	@Override
-//	public Wishlist createWishlist(Wishlist wishlist) throws WishlistException {
-//		if (wishlist == null) {
-//			throw new WishlistException("Wishlist cannot be null!");
-//		}
-//		Wishlist wishlistAdded;
-//
-//		try {
-//
-//			wishlistAdded = this.wishlistRepository.save(wishlist);
-//		} catch (Exception e) {
-//			throw new WishlistException("Wishlist could not be created");
-//		}
-//		return wishlistAdded;
-//	}
-
-	
 	/************************************************************************************
 	 * Method: getWishlistById() Description: To get the wishlist by id
 	 * 
@@ -49,9 +31,8 @@ public class WishlistServiceImpl implements WishlistService {
 	 *
 	 * @returns Wishlist- It returns wishlist object, if any error occurs it will
 	 *          throw WishlistException
-	 * @throws WishlistException - It is raised due to invalid wishlistId 
-	 * By - Kewal Shah 
-	 * Created Date - 10-Aug-2022
+	 * @throws WishlistException - It is raised due to invalid wishlistId By - Kewal
+	 *                           Shah Created Date - 10-Aug-2022
 	 * 
 	 ************************************************************************************/
 	@Override
@@ -66,7 +47,6 @@ public class WishlistServiceImpl implements WishlistService {
 		return foundWishlist.get();
 	}
 
-	
 	/************************************************************************************
 	 * Method: updateWishlist() Description: To update the wishlist
 	 * 
@@ -74,9 +54,8 @@ public class WishlistServiceImpl implements WishlistService {
 	 *
 	 * @returns Wishlist- It returns wishlist object, if any error occurs it will
 	 *          throw WishlistException
-	 * @throws WishlistException - It is raised due to invalid wishlistId 
-	 * By - Kewal Shah
-	 *  Created Date - 10-Aug-2022
+	 * @throws WishlistException - It is raised due to invalid wishlistId By - Kewal
+	 *                           Shah Created Date - 10-Aug-2022
 	 * 
 	 ************************************************************************************/
 	@Override
@@ -94,34 +73,15 @@ public class WishlistServiceImpl implements WishlistService {
 
 	}
 
-//	@Override
-//	public String removeWishlistById(Integer wishlistId) throws WishlistException {
-//		if(wishlistId == null) {
-//			throw new WishlistException("Wishlist cannot be null");
-//		}
-//		String isDeleted;
-//		Optional<Wishlist> foundWishlist = this.wishlistRepository.findById(wishlistId);
-//		if (!foundWishlist.isEmpty()) {
-//			this.wishlistRepository.deleteById(wishlistId);
-//			isDeleted = "Successful";
-//		} else {
-//			throw new WishlistException("wishlist does not exist");
-//		}
-//		return isDeleted;
-//
-//	}
-
-	
 	/************************************************************************************
 	 * Method: getAllWishlist() Description: To get all the wishlists
 	 * 
 	 * @returns WishlistList- It will returns wishlistList, if any error occurs it
 	 *          will throw WishlistException
 	 * @throws WishlistException - If wishlist will be empty it throws no wishlist
-	 *                           found message 
-	 *                           
-	 * By - Kewal Shah 
-	 * Created Date - 10-Aug-2022
+	 *                           found message
+	 * 
+	 *                           By - Kewal Shah Created Date - 10-Aug-2022
 	 * 
 	 ************************************************************************************/
 	@Override

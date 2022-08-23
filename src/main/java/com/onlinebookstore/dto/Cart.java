@@ -19,9 +19,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Cart {
-	//@Autowired
-	//UserRepository userRepository;
-	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
