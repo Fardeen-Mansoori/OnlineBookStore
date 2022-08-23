@@ -9,9 +9,10 @@ import com.onlinebookstore.exception.AdminException;
 import com.onlinebookstore.exception.UserException;
 /************************************************************************************
  * @author Faisal Khan
- * @Description It is a service class that provides the services for login 
+ * @Description It is a service class that provides the services for Authenticating user and Admin 
  *     
  *              Version 1.0 Created Date 20-AUG-2022
+ * @Date 18th August 2022
  ************************************************************************************/
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -23,8 +24,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	/************************************************************************************
 	 * Method: - Admin Login 
 	 * Description: - Login of Admin in Book Store Application.
-	 * @object Authenticatin - Admin Details
-	 * @returns Boolean - True if Admin get Login.
+	 * @object Authentication - Admin Details
+	 * @returns Boolean - True if Admin get Login otherwise false.
 	 * @throws AdminException - It is raised due to Admin details are invalid or null     
 	 ************************************************************************************/
 	
@@ -39,7 +40,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	 * Method: - User Login
 	 * Description: - Login of User in Book Store Application. 
 	 * @object Authenticatin - User Details
-	 * @returns Boolean - True if User get Login.
+	 * @returns Boolean - True if User get Login otherwise false.
 	 * @throws UserException - It is raised due to User details are invalid or null     
 	 ************************************************************************************/
 
