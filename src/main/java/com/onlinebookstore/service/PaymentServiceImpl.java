@@ -10,6 +10,13 @@ import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.Payment;
 import com.onlinebookstore.exception.OrderException;
 import com.onlinebookstore.exception.PaymentException;
+/************************************************************************************
+ *          @author          Devesh Chitlangia
+ *          Description      It is a service class that provides the services for creating a new payment, 
+                                        and get payment bt Id.
+  *         Version             1.0
+  *         Created Date    16-AUG-2022
+ ************************************************************************************/
 
 @Service
 public class PaymentServiceImpl implements PaymentService {

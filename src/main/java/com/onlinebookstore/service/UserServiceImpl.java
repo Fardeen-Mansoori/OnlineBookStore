@@ -14,7 +14,13 @@ import com.onlinebookstore.dto.Cart;
 import com.onlinebookstore.dto.User;
 import com.onlinebookstore.dto.Wishlist;
 import com.onlinebookstore.exception.UserException;
-
+/************************************************************************************
+ *          @author          Devesh Chitlangia
+ *          Description      It is a service class that provides the services for creating a new user, 
+                                        get user by ID, Update User and Get All Users.
+  *         Version             1.0
+  *         Created Date    16-AUG-2022
+ ************************************************************************************/
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
