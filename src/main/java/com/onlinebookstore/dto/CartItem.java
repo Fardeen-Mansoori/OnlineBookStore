@@ -22,7 +22,6 @@ public class CartItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "cart_item_id")
-	//@JsonIgnore
 	private Integer id;
 	private int qty;
 	private Double subtotal;

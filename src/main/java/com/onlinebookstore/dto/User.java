@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -26,16 +27,15 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class User {
 	@Id
 	private Integer userId;
-	
-
-    @JsonProperty(access = Access.WRITE_ONLY)
-	private String userPassword;
 
 	@NotNull(message = "Name can not be null")
 	@NotEmpty(message = "Name can not be empty")
 	@NotBlank(message = "Name can not be blank")
 	@Size(min = 3, max = 30, message = "Name must be of minimum 3 characters and maximum of 30 characters")
 	private String userName;
+
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private String userPassword;
 
 	@Email(message = "Email should be valid")
 	private String userEmail;
@@ -51,32 +51,45 @@ public class User {
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.LAZY)
 	@JsonIgnore
-	
+
 	private Wishlist wishlist;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
-	
+
 	private List<Order> orderList;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.LAZY)
 	@JsonIgnore
-	
+
 	private Cart cart;
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public User(Integer userId, String userName, String userPassword, String userEmail, String userAddress,
+			String userContact, Date dateOfBirth) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.userEmail = userEmail;
+		this.userAddress = userAddress;
+		this.userContact = userContact;
+		this.dateOfBirth = dateOfBirth;
+		
+	}
 
-	public User(Integer userId, String userPassword, String userName, String userEmail, String userAddress,
+	public User(Integer userId, String userName, String userPassword, String userEmail, String userAddress,
 			String userContact, Date dateOfBirth, Wishlist wishlist, List<Order> orderList, Cart cart) {
 		super();
 		this.userId = userId;
-		this.userPassword = userPassword;
 		this.userName = userName;
+		this.userPassword = userPassword;
 		this.userEmail = userEmail;
 		this.userAddress = userAddress;
 		this.userContact = userContact;

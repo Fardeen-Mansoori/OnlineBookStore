@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.onlinebookstore.dto.Payment;
-
+import com.onlinebookstore.exception.OrderException;
 import com.onlinebookstore.exception.PaymentException;
 import com.onlinebookstore.service.PaymentService;
 
@@ -19,7 +19,7 @@ public class PaymentTest {
 	Payment payment = new Payment("", "", "", 0, 0, 0, "", null);
 
 	@Test
-	public void createPaymentTest() throws PaymentException {
+	public void createPaymentTest() throws PaymentException, OrderException {
 		// String type, String cardName, String cardNumber, int expiryMonth, int
 		// expiryYear,
 		// int cvc, String holderName, Order order, UserBilling userBilling
@@ -28,7 +28,7 @@ public class PaymentTest {
 	}
 
 	@Test
-	public void getPaymentByIdTest() throws PaymentException {
+	public void getPaymentByIdTest() throws PaymentException, OrderException {
 		assertNotNull(paymentService.createPayment(payment));
 		assertNotNull(paymentService.getPaymentById(payment.getPaymentId()));
 		assertThrows(PaymentException.class,()-> paymentService.getPaymentById(200));

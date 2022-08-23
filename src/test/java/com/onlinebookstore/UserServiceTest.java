@@ -9,8 +9,6 @@ import com.onlinebookstore.dto.User;
 import com.onlinebookstore.exception.UserException;
 import com.onlinebookstore.service.UserService;
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Date;
 @SpringBootTest
 public class UserServiceTest {
 	
@@ -20,10 +18,9 @@ public class UserServiceTest {
 	@Autowired
 	UserRepository userRepository;
 	
-	//Integer userId, String userName, String userEmail, String userAddress, String userContact,
-	//Date dateOfBirth
 	
-	User user = new User(512,"Devesh","devesh@gmail.com","asdfghj","12345678",null);
+	
+	User user = new User(550,"Devesh","12345678","devesh@gmail.com","Delhi,India","1234567890",null);
 	
 	@Test
 	public void registerUserTest() throws UserException{
