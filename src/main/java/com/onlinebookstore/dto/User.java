@@ -1,23 +1,19 @@
 package com.onlinebookstore.dto;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
+import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -48,8 +44,8 @@ public class User {
 	@Pattern(regexp = "[0-9]{10}", message = "Phone number must be 10 digits[0-9].")
 	private String userContact;
 
-	@Temporal(TemporalType.DATE)
-	private Date dateOfBirth;
+	//@Temporal(TemporalType.DATE)
+	private LocalDate dateOfBirth;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonIgnore
@@ -72,7 +68,7 @@ public class User {
 	}
 
 	public User(Integer userId, String userPassword, String userName, String userEmail, String userAddress,
-			String userContact, Date dateOfBirth, Wishlist wishlist, List<Order> orderList, Cart cart) {
+			String userContact, LocalDate dateOfBirth, Wishlist wishlist, List<Order> orderList, Cart cart) {
 		super();
 		this.userId = userId;
 		this.userPassword = userPassword;
@@ -134,11 +130,11 @@ public class User {
 		this.userContact = userContact;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -166,11 +162,6 @@ public class User {
 		this.orderList = orderList;
 	}
 
-	@Override
-	public String toString() {
-		return "UserDetails [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail
-				+ ", userAddress=" + userAddress + ", userContact=" + userContact + ", dateOfBirth=" + dateOfBirth
-				+ "]";
-	}
+
 
 }

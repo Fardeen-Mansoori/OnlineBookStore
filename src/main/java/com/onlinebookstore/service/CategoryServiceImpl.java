@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.onlinebookstore.dao.CategoryRepository;
 import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.dto.Category;
-import com.onlinebookstore.exception.BookException;
 import com.onlinebookstore.exception.CategoryException;
 import com.onlinebookstore.exception.UserException;
 /************************************************************************************

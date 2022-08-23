@@ -1,6 +1,7 @@
 package com.onlinebookstore.service;
 
 import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,6 @@ import com.onlinebookstore.dto.Order;
 import com.onlinebookstore.dto.User;
 import com.onlinebookstore.exception.CartException;
 import com.onlinebookstore.exception.OrderException;
-import com.onlinebookstore.exception.UserException;
 
 /************************************************************************************
  *          @author         Faisal khan

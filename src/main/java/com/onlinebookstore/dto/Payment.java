@@ -2,6 +2,7 @@ package com.onlinebookstore.dto;
 
 
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +14,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
   
 @Entity
 public class Payment {
@@ -36,18 +37,22 @@ public class Payment {
 	@NotBlank(message="CardNumber can not be blank")
 	@Size(min=16,max =16,message = "CardNumber must be of 16 digits")
 	@Pattern(regexp ="[0-9]{16}")
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private String cardNumber;
 	
 	@NotNull(message="Expiry month cannot be null")
 	@Min(value=1)
 	@Max(value=12)
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private int expiryMonth;
 	
 	@NotNull
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private int expiryYear;
 	
 	@NotNull(message = "cvc cannot be null")
 	@Digits(message="cvc must contain 3 digits.", fraction = 0, integer = 3)
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private int cvc;
 	
 	@NotNull(message = "Holder name can not be null")

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.onlinebookstore.dao.BookRepository;
 import com.onlinebookstore.dto.Book;
 import com.onlinebookstore.exception.BookException;
-import com.onlinebookstore.exception.UserException;
+
 
 /************************************************************************************
  * @author Kewal Shah

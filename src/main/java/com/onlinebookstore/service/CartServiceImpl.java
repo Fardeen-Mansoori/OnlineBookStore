@@ -10,7 +10,7 @@ import com.onlinebookstore.dao.CartRepository;
 import com.onlinebookstore.dto.Cart;
 import com.onlinebookstore.dto.CartItem;
 import com.onlinebookstore.exception.CartException;
-import com.onlinebookstore.exception.UserException;
+
 /************************************************************************************
  *          @author          Fardeen Mansoori
  *          Description      It is a service class that provides the services for get Cart Details and 
