@@ -116,10 +116,10 @@ public class OrderServiceImpl implements OrderService {
 		Optional<Order> foundOrder = orderRepository.findById(orderId);
 		if (foundOrder.isEmpty()) {
 			throw new OrderException("Order does not exist for id " + orderId);
-		} else {
-			orderRepository.delete(foundOrder.get());
-			isDeleted = "Successful";
-		}
+		} 
+		foundOrder.get().setOrderStatus("order cancelled");
+		Order updatedOrder = this.orderRepository.save(foundOrder.get());
+		isDeleted = "Order Cancelled Successfully";
 		return isDeleted;
 	}
 
