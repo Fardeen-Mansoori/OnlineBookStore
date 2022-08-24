@@ -37,6 +37,10 @@ public class BookServiceImpl implements BookService {
 //@Transactional
 	@Override
 	public Book addBook(Book book) throws BookException {
+		Optional<Book> foundBook = this.bookRepository.findById(book.getBookId());
+		if (!(foundBook.isEmpty())) {
+			throw new BookException("Book already exists for id " + book.getBookId());
+		}
 		Book bookAdded = null;
 		try {
 			bookAdded = this.bookRepository.save(book);
