@@ -47,6 +47,11 @@ public class PaymentServiceImpl implements PaymentService {
 			throw new PaymentException("Payment has already done for the given order");
 
 		}
+		if (order.getOrderStatus().equalsIgnoreCase("order cancelled")) {
+
+			throw new PaymentException("Payment cannot be done for the cancelled order");
+
+		}
 		Payment newPayment = paymentRepository.save(payment);
 		order.setPayment(payment);
 		order.setOrderStatus("Order placed Successfully");
