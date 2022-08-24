@@ -61,30 +61,16 @@ public class UserServiceTest {
 	}
 	
 	
-//	@Test
-//	public void deleteUserByIdTest() throws UserException{
-//		assertNotNull(this.userService.registerUser(user));
-//		assertEquals("Successful",this.userService.deleteUserById(user.getUserId()));
-//		assertThrows(UserException.class,()->this.userService.deleteUserById(0));
-//		
-//	}
-	
 	@Test
 	public void getAllUserTest() throws UserException{
 		
 		user = this.userService.registerUser(user);
 		assertNotNull(this.userService.getAllUser());
 		assertEquals("Successful",this.userService.deleteUserById(user.getUserId()));
-		//this.userRepository.deleteAll();
-		//assertThrows(UserException.class,()->this.userService.getAllUser());
+		
 		
 	}
 	
-//	@AfterEach
-//	public void deleteUserTestData() throws UserException{
-//		//assertNotNull(this.userService.registerUser(user));
-//	    assertEquals("Successful",this.userService.deleteUserById(user.getUserId()));
-//		assertThrows(UserException.class,()->this.userService.deleteUserById(0));
-//	}
+
 
 }
