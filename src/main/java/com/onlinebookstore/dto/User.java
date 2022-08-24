@@ -47,7 +47,6 @@ public class User {
 	@Pattern(regexp = "[0-9]{10}", message = "Phone number must be 10 digits[0-9].")
 	private String userContact;
 
-	// @Temporal(TemporalType.DATE)
 	private LocalDate dateOfBirth;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
