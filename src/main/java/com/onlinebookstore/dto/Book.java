@@ -1,6 +1,5 @@
 package com.onlinebookstore.dto;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -12,27 +11,25 @@ import javax.validation.constraints.NotNull;
 public class Book {
 	@Id
 	private Integer bookId;
-	@NotNull(message="Name cannot be null")
+	@NotNull(message = "Name cannot be null")
 	@NotBlank()
 	private String bookName;
-	@NotNull(message="BookDescription cannot be null")
+	@NotNull(message = "BookDescription cannot be null")
 	@NotBlank()
 	private String bookDescription;
-	@NotNull(message="AuthorName cannot be null")
+	@NotNull(message = "AuthorName cannot be null")
 	@NotBlank()
 	private String bookAuthor;
-	@NotNull(message="Price cannot be null")
-	//@NotBlank()
-	@Min(value=10, message="Min price can be 10")
+	@NotNull(message = "Price cannot be null")
+	// @NotBlank()
+	@Min(value = 10, message = "Min price can be 10")
 	private Double bookPrice;
 
-	
 	@ManyToOne
-	//@JoinColumn(name="category_id")
-	//@JsonIgnore
+	// @JoinColumn(name="category_id")
+	// @JsonIgnore
 	private Category category;
-	
-	
+
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -48,12 +45,8 @@ public class Book {
 		this.bookPrice = bookPrice;
 		this.category = category;
 	}
-	
 
-	public Book(Integer bookId, @NotNull(message = "Name cannot be null") @NotBlank String bookName,
-			@NotNull(message = "BookDescription cannot be null") @NotBlank String bookDescription,
-			@NotNull(message = "AuthorName cannot be null") @NotBlank String bookAuthor,
-			@NotNull(message = "Price cannot be null") @Min(value = 10, message = "Min price can be 10") Double bookPrice) {
+	public Book(Integer bookId, String bookName, String bookDescription, String bookAuthor, Double bookPrice) {
 		super();
 		this.bookId = bookId;
 		this.bookName = bookName;
@@ -101,18 +94,13 @@ public class Book {
 	public void setBookPrice(Double bookPrice) {
 		this.bookPrice = bookPrice;
 	}
-	
+
 	public Category getCategory() {
 		return category;
 	}
-	
+
 	public void setCategory(Category category) {
 		this.category = category;
 	}
 
-	@Override
-	public String toString() {
-		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", bookDescription=" + bookDescription
-				+ ", bookAuthor=" + bookAuthor + ", bookPrice=" + bookPrice + ", category=" + category + "]";
-	}}
-	
+}

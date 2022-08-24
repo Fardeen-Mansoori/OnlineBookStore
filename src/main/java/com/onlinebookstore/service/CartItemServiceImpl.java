@@ -86,7 +86,7 @@ public class CartItemServiceImpl implements CartItemService {
 				cartItem.setQty(cartItem.getQty() + qty);
 				cartItem.setSubtotal(book.getBookPrice() * cartItem.getQty());
 				cartItemRepository.save(cartItem);
-				//cartService.updateCart(user.getCart());
+				
 				return cartItem;
 			}
 		}
@@ -103,7 +103,7 @@ public class CartItemServiceImpl implements CartItemService {
 		bookToCartItem.setBook(book);
 		bookToCartItem.setCartItem(cartItem);
 		bookToCartItemRepository.save(bookToCartItem);
-		//cartService.updateCart(user.getCart());
+		
 		return cartItem;
 	}
  

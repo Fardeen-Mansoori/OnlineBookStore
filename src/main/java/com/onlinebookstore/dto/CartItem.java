@@ -59,6 +59,17 @@ public class CartItem {
 		this.cart = cart;
 		this.order = order;
 	}
+	
+	
+
+	public CartItem(Integer id, int qty, Double subtotal, Book book, Cart cart) {
+		super();
+		this.id = id;
+		this.qty = qty;
+		this.subtotal = subtotal;
+		this.book = book;
+		this.cart = cart;
+	}
 
 	public Integer getId() {
 		return id;
